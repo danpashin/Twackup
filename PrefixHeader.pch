@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  tweaksBackup
+//
+//  Created by Даниил on 07/12/2018.
+//  Copyright © 2018 Даниил. All rights reserved.
+//
+
+@import Foundation;
+
+#define error_log(string, ...)\
+    printf("%s:%i '" string "'\n\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, ##__VA_ARGS__ )
+
+
+extern BOOL strictCopy;

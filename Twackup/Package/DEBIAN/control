@@ -1,0 +1,16 @@
+Package: ru.danpashin.twackup
+Name: Twackup
+Version: CURRENT_PROJECT_VERSION
+Description: Простая утилита для бекапа твиков.
+ Как использовать? Просто введите twackup в терминал и все! Утилита выполнит резервное копирование всех установленных пакетов в .deb. После вы сможете найти их в /var/mobile/Documents/twackup/
+ Утилита должна работать на iOS 8.0 - 11.4.1. Полная работоспособность не гарантируется.
+Depends: dpkg, firmware (>= 8.0)
+Priority: optional
+Architecture: iphoneos-arm
+Author: Даниил <admin@danpashin.ru>
+Maintainer:  Даниил <admin@danpashin.ru>
+dev: danpashin
+Tag: purpose::extension, compatible::ios8, compatible::ios9, compatible::ios10, compatible::ios11
+Section: Utilities
+Installed-size: PACKAGE_SIZE
+

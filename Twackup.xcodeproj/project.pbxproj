@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A50F041821BA548F00859738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50F041721BA548F00859738 /* Foundation.framework */; };
+		A50F041B21BA548F00859738 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A50F041A21BA548F00859738 /* main.m */; };
+		A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C95921BA81D0003DE3C5 /* NSTask.h */; };
+		A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C95C21BA84BB003DE3C5 /* TWPackage.h */; };
+		A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C95D21BA84BB003DE3C5 /* TWPackage.m */; };
+		A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */; };
+		A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */; };
+		A569C96921BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A50F041421BA548F00859738 /* twackup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = twackup; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50F041721BA548F00859738 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A50F041A21BA548F00859738 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A50F041E21BA548F00859738 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		A569C95921BA81D0003DE3C5 /* NSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTask.h; sourceTree = "<group>"; };
+		A569C95B21BA830A003DE3C5 /* sign.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sign.entitlements; sourceTree = "<group>"; };
+		A569C95C21BA84BB003DE3C5 /* TWPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWPackage.h; sourceTree = "<group>"; };
+		A569C95D21BA84BB003DE3C5 /* TWPackage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWPackage.m; sourceTree = "<group>"; };
+		A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTask+Twackup.h"; sourceTree = "<group>"; };
+		A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Twackup.m"; sourceTree = "<group>"; };
+		A569C96421BA9660003DE3C5 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TWPackage+dpkgSupport.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A50F041021BA548F00859738 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50F041821BA548F00859738 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50F040A21BA548F00859738 = {
+			isa = PBXGroup;
+			children = (
+				A569C95B21BA830A003DE3C5 /* sign.entitlements */,
+				A569C96421BA9660003DE3C5 /* PrefixHeader.pch */,
+				A50F041921BA548F00859738 /* Twackup */,
+				A50F041621BA548F00859738 /* Frameworks */,
+				A50F041521BA548F00859738 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50F041521BA548F00859738 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A50F041421BA548F00859738 /* twackup */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50F041621BA548F00859738 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A50F041721BA548F00859738 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A50F041921BA548F00859738 /* Twackup */ = {
+			isa = PBXGroup;
+			children = (
+				A50F041A21BA548F00859738 /* main.m */,
+				A569C95C21BA84BB003DE3C5 /* TWPackage.h */,
+				A569C95D21BA84BB003DE3C5 /* TWPackage.m */,
+				A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */,
+				A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */,
+				A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */,
+				A569C95921BA81D0003DE3C5 /* NSTask.h */,
+				A50F041C21BA548F00859738 /* Package */,
+			);
+			path = Twackup;
+			sourceTree = "<group>";
+		};
+		A50F041C21BA548F00859738 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				A50F041D21BA548F00859738 /* DEBIAN */,
+				A50F041F21BA548F00859738 /* usr */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		A50F041D21BA548F00859738 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				A50F041E21BA548F00859738 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		A50F041F21BA548F00859738 /* usr */ = {
+			isa = PBXGroup;
+			children = (
+				A50F042021BA548F00859738 /* bin */,
+			);
+			name = usr;
+			sourceTree = "<group>";
+		};
+		A50F042021BA548F00859738 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A50F041121BA548F00859738 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */,
+				A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */,
+				A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A50F041321BA548F00859738 /* twackup */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50F042521BA548F00859738 /* Build configuration list for PBXNativeTarget "twackup" */;
+			buildPhases = (
+				A50F040F21BA548F00859738 /* Sources */,
+				A50F041021BA548F00859738 /* Frameworks */,
+				A50F041121BA548F00859738 /* Headers */,
+				A50F041221BA548F00859738 /* Copy files and build deb */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = twackup;
+			productName = tweaksBackup;
+			productReference = A50F041421BA548F00859738 /* twackup */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A50F040B21BA548F00859738 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TW;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Даниил";
+				TargetAttributes = {
+					A50F041321BA548F00859738 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = A50F040E21BA548F00859738 /* Build configuration list for PBXProject "Twackup" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A50F040A21BA548F00859738;
+			productRefGroup = A50F041521BA548F00859738 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50F041321BA548F00859738 /* twackup */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A50F041221BA548F00859738 /* Copy files and build deb */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy files and build deb";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"ls -1 ${BUILT_PRODUCTS_DIR}/*.dylib 2>/dev/null | wc -l\" == 0 ]]; then\necho \"${BUILT_PRODUCTS_DIR} does not contain any dylib file.\";\nexit 1;\nfi\n\nPACKAGE_PROJECT_FOLDER=\"${PROJECT_DIR}/${PROJECT_NAME}/Package\";\nif [ ! -d $PACKAGE_PROJECT_FOLDER ]; then\necho \"${PROJECT_DIR}/Package does not exits.\";\nexit 2;\nfi\n\n\nPACKAGE_TEMP_FOLDER=\"${BUILT_PRODUCTS_DIR}/Package\";\nif [ -d $PACKAGE_TEMP_FOLDER ]; then\nrm -rf $PACKAGE_TEMP_FOLDER;\nfi\n\necho \"[->] Copying binaries...\";\ncp -r $PACKAGE_PROJECT_FOLDER $PACKAGE_TEMP_FOLDER;\ncp \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}\" \"$PACKAGE_TEMP_FOLDER/usr/bin\" >> /dev/null;\nldid -S\"${PROJECT_DIR}/sign.entitlements\" \"$PACKAGE_TEMP_FOLDER/usr/bin/${EXECUTABLE_NAME}\";\n\necho \"[->] Cleaning (stage 1)...\"\nfind $PACKAGE_TEMP_FOLDER -name \".*\" -exec rm -rf \"{}\" \\;\n\necho \"[->] Updating control...\";\nsed -i '' \"s/CURRENT_PROJECT_VERSION/${CURRENT_PROJECT_VERSION}/g\" \"$PACKAGE_TEMP_FOLDER/DEBIAN/control\";\n\necho \"[->] Counting size...\";\nFOLDER_SIZE=$(du -sk $PACKAGE_TEMP_FOLDER);\nINSTALLED_SIZE=$(echo $FOLDER_SIZE | tr -dc '0-9' );\nsed -i '' \"s/PACKAGE_SIZE/${INSTALLED_SIZE}/g\" \"$PACKAGE_TEMP_FOLDER/DEBIAN/control\";\n\n\necho \"[->] Packaging...\";\nDEBS_FOLDER=\"${PROJECT_DIR}/debs\";\nif [ ! -d $DEBS_FOLDER ]; then\nmkdir $DEBS_FOLDER\nfi\n\nDEB_NAME=\"${PRODUCT_BUNDLE_IDENTIFIER}_${CURRENT_PROJECT_VERSION}_${PLATFORM_NAME}-arm.deb\";\ndpkg-deb -b -Zlzma $PACKAGE_TEMP_FOLDER $DEBS_FOLDER/$DEB_NAME 2> /dev/null;\n\necho \"[->] Cleaning (stage 2)...\";\nrm -rf $PACKAGE_TEMP_FOLDER;\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A50F040F21BA548F00859738 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50F041B21BA548F00859738 /* main.m in Sources */,
+				A569C96921BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m in Sources */,
+				A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */,
+				A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A50F042321BA548F00859738 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = 1;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.3;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.danpashin.twackup;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A50F042421BA548F00859738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = 1;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.danpashin.twackup;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A50F042621BA548F00859738 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW97WHTS78;
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_WARN_UNDECLARED_SELECTOR = 0;
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A50F042721BA548F00859738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW97WHTS78;
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_WARN_UNDECLARED_SELECTOR = 0;
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A50F040E21BA548F00859738 /* Build configuration list for PBXProject "Twackup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50F042321BA548F00859738 /* Debug */,
+				A50F042421BA548F00859738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50F042521BA548F00859738 /* Build configuration list for PBXNativeTarget "twackup" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50F042621BA548F00859738 /* Debug */,
+				A50F042721BA548F00859738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A50F040B21BA548F00859738 /* Project object */;
+}
