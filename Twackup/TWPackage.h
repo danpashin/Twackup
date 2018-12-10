@@ -13,17 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TWPackage : NSObject
 
 /**
- Идентификатор пакета.
+ Package identifier.
  */
 @property (copy, nonatomic, readonly) NSString *identifier;
 
 /**
- Версия пакета.
+ Package version.
  */
 @property (copy, nonatomic, readonly) NSString *version;
 
 /**
- Архитектура пакета.
+ Package supported architecture.
  */
 @property (copy, nonatomic, readonly) NSString *architecture;
 
@@ -31,30 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithID:(NSString *)identifier version:(NSString *)version architecture:(NSString *)architecture;
 
 /**
- Собирает .deb из файлов пакета.
+ Builds deb from package files.
  */
 - (void)buildDebAtURL:(NSURL *)tempURL;
-
-@end
-
-
-
-@interface TWPackage (dpkgSupport)
-
-/**
- Получает все пакеты, что есть в системе. Сортировку, фильтрование не выполняет.
- 
- @return Возвращает массив пакетов.
- */
-+ (NSArray <TWPackage *> *)getAllPackages;
-
-
-+ (NSArray <NSString *> *)filesForPackage:(NSString *)package;
-
-+ (NSMutableString * _Nullable)controlForPackage:(NSString *)package;
-
-
-+ (NSRegularExpression * _Nullable)regexForControlLineNamed:(NSString *)lineName;
 
 @end
 

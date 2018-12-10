@@ -8,6 +8,7 @@
 
 #import "TWPackage.h"
 #import "NSTask+Twackup.h"
+#import "TWDpkg.h"
 
 @interface TWPackage ()
 @property (strong, nonatomic) NSURL *workingDirectoryURL;
@@ -88,7 +89,7 @@
     __block BOOL operationISsuccess = YES;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSArray <NSString *> *packageFiles = [self.class filesForPackage:self.identifier];
+    NSArray <NSString *> *packageFiles = [TWDpkg filesForPackage:self.identifier];
     
     [packageFiles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isEqualToString:@"/."] || obj.length == 0)
@@ -134,7 +135,7 @@
         }
     }];
     
-    NSMutableString *control = [self.class controlForPackage:self.identifier];
+    NSMutableString *control = [TWDpkg controlForPackage:self.identifier];
     NSURL *controlURL = [debianFolder URLByAppendingPathComponent:@"control"];
     
     NSError *controlError = nil;

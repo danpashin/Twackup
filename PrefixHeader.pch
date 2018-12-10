@@ -13,3 +13,8 @@
 
 
 extern BOOL strictCopy;
+
+#define TWStringize_(string) #string
+#define TWStringize(string) @TWStringize_(string)
+
+static NSString *const kTWVersion = @"";

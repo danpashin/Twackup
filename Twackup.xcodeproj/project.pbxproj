@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		206BBEE2724D72F094A4FB9C /* libPods-twackup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */; };
 		A50F041821BA548F00859738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50F041721BA548F00859738 /* Foundation.framework */; };
 		A50F041B21BA548F00859738 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A50F041A21BA548F00859738 /* main.m */; };
 		A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C95921BA81D0003DE3C5 /* NSTask.h */; };
@@ -14,10 +15,16 @@
 		A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C95D21BA84BB003DE3C5 /* TWPackage.m */; };
 		A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */; };
 		A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */; };
-		A569C96921BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */; };
+		A57A21D021BEBA9E008F3DE9 /* TWackup.h in Headers */ = {isa = PBXBuildFile; fileRef = A57A21CE21BEBA9E008F3DE9 /* TWackup.h */; };
+		A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21CF21BEBA9E008F3DE9 /* TWackup.m */; };
+		A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */ = {isa = PBXBuildFile; fileRef = A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */; };
+		A57A21D521BEBE9E008F3DE9 /* TWDpkg.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup.release.xcconfig"; path = "Pods/Target Support Files/Pods-twackup/Pods-twackup.release.xcconfig"; sourceTree = "<group>"; };
+		56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twackup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		685A7443733C4172DC7F3777 /* Pods-twackup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twackup/Pods-twackup.debug.xcconfig"; sourceTree = "<group>"; };
 		A50F041421BA548F00859738 /* twackup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = twackup; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50F041721BA548F00859738 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A50F041A21BA548F00859738 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -29,7 +36,10 @@
 		A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTask+Twackup.h"; sourceTree = "<group>"; };
 		A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Twackup.m"; sourceTree = "<group>"; };
 		A569C96421BA9660003DE3C5 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TWPackage+dpkgSupport.m"; sourceTree = "<group>"; };
+		A57A21CE21BEBA9E008F3DE9 /* TWackup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWackup.h; sourceTree = "<group>"; };
+		A57A21CF21BEBA9E008F3DE9 /* TWackup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWackup.m; sourceTree = "<group>"; };
+		A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWDpkg.h; sourceTree = "<group>"; };
+		A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWDpkg.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50F041821BA548F00859738 /* Foundation.framework in Frameworks */,
+				206BBEE2724D72F094A4FB9C /* libPods-twackup.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +63,7 @@
 				A50F041921BA548F00859738 /* Twackup */,
 				A50F041621BA548F00859738 /* Frameworks */,
 				A50F041521BA548F00859738 /* Products */,
+				C79A3A69AB9DEFB0235C9554 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				A50F041721BA548F00859738 /* Foundation.framework */,
+				56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -75,9 +88,12 @@
 			isa = PBXGroup;
 			children = (
 				A50F041A21BA548F00859738 /* main.m */,
+				A57A21CE21BEBA9E008F3DE9 /* TWackup.h */,
+				A57A21CF21BEBA9E008F3DE9 /* TWackup.m */,
+				A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */,
+				A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */,
 				A569C95C21BA84BB003DE3C5 /* TWPackage.h */,
 				A569C95D21BA84BB003DE3C5 /* TWPackage.m */,
-				A569C96721BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m */,
 				A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */,
 				A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */,
 				A569C95921BA81D0003DE3C5 /* NSTask.h */,
@@ -118,6 +134,15 @@
 			name = bin;
 			sourceTree = "<group>";
 		};
+		C79A3A69AB9DEFB0235C9554 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				685A7443733C4172DC7F3777 /* Pods-twackup.debug.xcconfig */,
+				1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -127,6 +152,8 @@
 			files = (
 				A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */,
 				A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */,
+				A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */,
+				A57A21D021BEBA9E008F3DE9 /* TWackup.h in Headers */,
 				A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A50F042521BA548F00859738 /* Build configuration list for PBXNativeTarget "twackup" */;
 			buildPhases = (
+				AFAD174C6B994B3191A4A9B7 /* [CP] Check Pods Manifest.lock */,
 				A50F040F21BA548F00859738 /* Sources */,
 				A50F041021BA548F00859738 /* Frameworks */,
 				A50F041121BA548F00859738 /* Headers */,
@@ -204,6 +232,28 @@
 			shellScript = "if [[ \"ls -1 ${BUILT_PRODUCTS_DIR}/*.dylib 2>/dev/null | wc -l\" == 0 ]]; then\necho \"${BUILT_PRODUCTS_DIR} does not contain any dylib file.\";\nexit 1;\nfi\n\nPACKAGE_PROJECT_FOLDER=\"${PROJECT_DIR}/${PROJECT_NAME}/Package\";\nif [ ! -d $PACKAGE_PROJECT_FOLDER ]; then\necho \"${PROJECT_DIR}/Package does not exits.\";\nexit 2;\nfi\n\n\nPACKAGE_TEMP_FOLDER=\"${BUILT_PRODUCTS_DIR}/Package\";\nif [ -d $PACKAGE_TEMP_FOLDER ]; then\nrm -rf $PACKAGE_TEMP_FOLDER;\nfi\n\necho \"[->] Copying binaries...\";\ncp -r $PACKAGE_PROJECT_FOLDER $PACKAGE_TEMP_FOLDER;\ncp \"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}\" \"$PACKAGE_TEMP_FOLDER/usr/bin\" >> /dev/null;\nldid -S\"${PROJECT_DIR}/sign.entitlements\" \"$PACKAGE_TEMP_FOLDER/usr/bin/${EXECUTABLE_NAME}\";\n\necho \"[->] Cleaning (stage 1)...\"\nfind $PACKAGE_TEMP_FOLDER -name \".*\" -exec rm -rf \"{}\" \\;\n\necho \"[->] Updating control...\";\nsed -i '' \"s/CURRENT_PROJECT_VERSION/${CURRENT_PROJECT_VERSION}/g\" \"$PACKAGE_TEMP_FOLDER/DEBIAN/control\";\n\necho \"[->] Counting size...\";\nFOLDER_SIZE=$(du -sk $PACKAGE_TEMP_FOLDER);\nINSTALLED_SIZE=$(echo $FOLDER_SIZE | tr -dc '0-9' );\nsed -i '' \"s/PACKAGE_SIZE/${INSTALLED_SIZE}/g\" \"$PACKAGE_TEMP_FOLDER/DEBIAN/control\";\n\n\necho \"[->] Packaging...\";\nDEBS_FOLDER=\"${PROJECT_DIR}/debs\";\nif [ ! -d $DEBS_FOLDER ]; then\nmkdir $DEBS_FOLDER\nfi\n\nDEB_NAME=\"${PRODUCT_BUNDLE_IDENTIFIER}_${CURRENT_PROJECT_VERSION}_${PLATFORM_NAME}-arm.deb\";\ndpkg-deb -b -Zlzma $PACKAGE_TEMP_FOLDER $DEBS_FOLDER/$DEB_NAME 2> /dev/null;\n\necho \"[->] Cleaning (stage 2)...\";\nrm -rf $PACKAGE_TEMP_FOLDER;\n";
 			showEnvVarsInLog = 0;
 		};
+		AFAD174C6B994B3191A4A9B7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-twackup-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -211,9 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57A21D521BEBE9E008F3DE9 /* TWDpkg.m in Sources */,
 				A50F041B21BA548F00859738 /* main.m in Sources */,
-				A569C96921BAD0B5003DE3C5 /* TWPackage+dpkgSupport.m in Sources */,
 				A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */,
+				A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */,
 				A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,7 +305,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.3;
+				CURRENT_PROJECT_VERSION = 0.4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -276,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -319,7 +370,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.3;
+				CURRENT_PROJECT_VERSION = 0.4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -335,7 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.danpashin.twackup;
@@ -347,6 +398,7 @@
 		};
 		A50F042621BA548F00859738 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 685A7443733C4172DC7F3777 /* Pods-twackup.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW97WHTS78;
@@ -365,6 +417,7 @@
 		};
 		A50F042721BA548F00859738 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VW97WHTS78;

@@ -7,63 +7,67 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TWPackage.h"
+#import "TWackup.h"
 
 BOOL strictCopy = NO;
-void recreateDirectory(NSURL *directoryURL);
-void backupAllPackages(NSURL *workingDirectory);
+
+void printHelpMessage(void);
+NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void);
 
 
 
 int main(int argc, const char * argv[])
 {
-    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-    strictCopy = [processInfo.arguments containsObject:@"-strict"];
+    NSDictionary <NSString *, NSArray <NSString *> *> *arguments = parseArgments();
+    strictCopy = arguments[@"-strict"] ? YES : NO;
     
-    NSURL *workingDirectory = [NSURL fileURLWithPath:@"/var/mobile/Documents/twackup"];
-    recreateDirectory(workingDirectory);
-    
-    NSString *userName = processInfo.environment[@"USER"].lowercaseString;
-    if (![userName isEqualToString:@"root"] && access(workingDirectory.path.UTF8String, W_OK) != 0) {
-        error_log("Утилита не имеет прав на запись в рабочую папку.\nПожалуйста, убедитесь, что утилита запущена от пользователя root.");
-        return EXIT_FAILURE;
+    if (arguments[@"-a"] || arguments[@"--all"]) {
+        [TWackup rebuildAllPackages];
+    } else if (arguments[@"-i"] || arguments[@"--identifier"]) {
+        NSArray <NSString *> *identifiers = arguments[@"-i"] ?: arguments[@"--identifier"];
+        [identifiers enumerateObjectsUsingBlock:^(NSString * _Nonnull packageID, NSUInteger idx, BOOL * _Nonnull stop) {
+            [TWackup rebuildPackageWithIdentifier:packageID];
+        }];
+    } else {
+        printHelpMessage();
     }
-    
-    backupAllPackages(workingDirectory);
     
     return EXIT_SUCCESS;
 }
 
-
-
-void backupAllPackages(NSURL *workingDirectory)
+void printHelpMessage(void)
 {
-    printf("Подготовка пакетов. Пожалуйста, подождите...\n");
-    
-    NSArray <TWPackage *> *allPackages = [TWPackage getAllPackages];
-    printf("Найден(о) %lu пакет. Начинаем резервное копирование...\n", (unsigned long)allPackages.count);
-    
-    NSOperationQueue *operationQueue = [NSOperationQueue new];
-    operationQueue.maxConcurrentOperationCount = 5;
-    operationQueue.name = @"ru.danpashin.twackup.packages.backup";
-    
-    [allPackages enumerateObjectsUsingBlock:^(TWPackage * _Nonnull package, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:package
-                                                                                selector:@selector(buildDebAtURL:)
-                                                                                  object:workingDirectory];
-        [operationQueue addOperation:operation];
-    }];
-    
-    [operationQueue waitUntilAllOperationsAreFinished];
-    
-    printf("\nКопирование успешно завершено! Перейдите в '%s' для просмотра .deb пакетов.\n", workingDirectory.path.UTF8String);
+    printf("Использование:" "\n"
+           "-a --all Делает копирование всех установленных твиков в .deb" "\n"
+//           "-z Упаковывает все обработанные .deb архивы в один zip архив" "\n"
+//           "Эти два параметра можно использовать совместно" "\n"
+           "\n"
+           "-i --identifier [идентификатор_пакета] Делает копирование пакета с указанным идентификатором в .deb" "\n"
+           );
 }
 
-void recreateDirectory(NSURL *directoryURL)
+
+NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void)
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:directoryURL.path])
-        [fileManager removeItemAtURL:directoryURL error:nil];
+    NSArray <NSString *> *arguments = [NSProcessInfo processInfo].arguments;
+    NSUInteger argumentsCount = arguments.count;
     
-    [fileManager createDirectoryAtURL:directoryURL withIntermediateDirectories:NO attributes:nil error:nil];
+    NSMutableDictionary *argumentsDict = [NSMutableDictionary dictionary];
+    for (NSUInteger index = 1; index < argumentsCount; index++) {
+        NSString *argument = arguments[index];
+        
+        if ([argument hasPrefix:@"-"]) {
+            NSMutableArray <NSString *> *postArguments = [NSMutableArray array];
+            for(NSUInteger secondIndex = index + 1; secondIndex < argumentsCount; secondIndex++) {
+                NSString *nextArgument = arguments[secondIndex];
+                if ([nextArgument hasPrefix:@"-"])
+                    break;
+                
+                [postArguments addObject:nextArgument];
+            }
+            argumentsDict[argument] = postArguments;
+        }
+    }
+    
+    return argumentsDict;
 }

@@ -1,22 +1,23 @@
 //
-//  TWPackage+dpkgSupport.m
-//  Twackup
+//  TWDpkg.m
+//  twackup
 //
-//  Created by Даниил on 07/12/2018.
+//  Created by Даниил on 10/12/2018.
 //  Copyright © 2018 Даниил. All rights reserved.
 //
 
+#import "TWDpkg.h"
 #import "TWPackage.h"
 #import "NSTask+Twackup.h"
 
-@implementation TWPackage (dpkgSupport)
+@implementation TWDpkg
 
 + (NSString *)dpkgPath
 {
     return @"/usr/bin/dpkg-query";
 }
 
-+ (NSArray <TWPackage *> *)getAllPackages
++ (NSArray <TWPackage *> *)allPackages
 {
     NSData *dpkgOutput = nil;
     
@@ -49,7 +50,7 @@
     NSString *packageArchitecture = [self architectureForControl:control];
     
     return [[TWPackage alloc] initWithID:packageID version:packageVersion
-                              architecture:packageArchitecture];
+                            architecture:packageArchitecture];
 }
 
 + (NSArray <NSString *> *)filesForPackage:(NSString *)packageID
@@ -90,8 +91,8 @@
 {
     NSString *pattern = [NSString stringWithFormat:@"(%@: .*)\n", lineName];
     return [NSRegularExpression regularExpressionWithPattern:pattern
-                                              options:NSRegularExpressionCaseInsensitive
-                                                error:nil];
+                                                     options:NSRegularExpressionCaseInsensitive
+                                                       error:nil];
 }
 
 + (NSString *)versionForControl:(NSString *)control
