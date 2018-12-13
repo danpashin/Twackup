@@ -44,7 +44,7 @@
 {
     TWPackage *package = [TWDpkg packageForIdentifier:identifier];
     if (!package) {
-        error_log("Указанный пакет не найден!");
+        error_log("Пакет %s не найден!", identifier.UTF8String);
         return;
     }
     

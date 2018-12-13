@@ -46,6 +46,9 @@
         return nil;
     
     NSString *control = [self controlForPackage:packageID];
+    if (!control)
+        return nil;
+    
     NSString *packageVersion = [self versionForControl:control];
     NSString *packageArchitecture = [self architectureForControl:control];
     
@@ -72,8 +75,10 @@
     NSData *packageControl = nil;
     
     NSArray *arguments = @[@"-s", packageID];
-    if ([NSTask syncronouslyExecute:self.dpkgPath arguments:arguments output:&packageControl]) {
+    if ([NSTask syncronouslyExecute:self.dpkgPath arguments:arguments output:&packageControl] && packageControl) {
         NSMutableString *controlString = [[NSMutableString alloc] initWithData:packageControl encoding:NSUTF8StringEncoding];
+        if (!controlString)
+            return nil;
         
         NSRegularExpression *statusRegex = [self regexForControlLineNamed:@"Status"];
         [statusRegex replaceMatchesInString:controlString options:0 range:NSMakeRange(0, controlString.length) withTemplate:@""];

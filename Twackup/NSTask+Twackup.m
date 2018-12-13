@@ -20,6 +20,7 @@
     NSTask *task = [NSTask new];
     task.arguments = arguments;
     task.standardOutput = pipe;
+    task.standardError = pipe;
     
     if (@available(iOS 11.0, *)) {
         task.executableURL = [NSURL fileURLWithPath:executablePath];
