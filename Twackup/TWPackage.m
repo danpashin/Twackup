@@ -33,39 +33,30 @@
             NSStringFromClass([self class]), self, self.identifier, self.version, self.architecture];
 }
 
-- (void)buildDebAtURL:(NSURL *)tempURL
+- (BOOL)buildDebAtURL:(NSURL *)tempURL error:(NSError *_Nullable *_Nullable)error
 {
-    const char *packageID = self.identifier.UTF8String;
-    
-    printf("Обработка %s...\n", packageID);
-    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSString *directoryName = [NSString stringWithFormat:@"%@_%@_%@", self.identifier, self.version, self.architecture];
     self.workingDirectoryURL = [tempURL URLByAppendingPathComponent:directoryName];
     
-    NSError *creatingRemovingError = nil;
     if ([fileManager fileExistsAtPath:self.workingDirectoryURL.path]) {
         [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
     }
     
-    [fileManager createDirectoryAtURL:self.workingDirectoryURL withIntermediateDirectories:NO
-                           attributes:nil error:&creatingRemovingError];
-    if (creatingRemovingError) {
-        error_log("Ошибка при создании директории! %s\nОстанавливаем...", creatingRemovingError.description.UTF8String);
-        return;
+    BOOL directoryCreated = [fileManager createDirectoryAtURL:self.workingDirectoryURL
+                                  withIntermediateDirectories:NO attributes:nil error:error];
+    if (!directoryCreated)
+        return NO;
+    
+    if (![self copyFilesWithError:error]) {
+        [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
+        return NO;
     }
     
-    BOOL copyingWasSuccess = [self copyFiles];
-    if (!copyingWasSuccess) {
+    if (![self copyMetadataWithError:error]) {
         [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
-        return;
-    }
-    
-    copyingWasSuccess = [self copyMetadata];
-    if (!copyingWasSuccess) {
-        [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
-        return;
+        return NO;
     }
     
     NSString *dpkgPath = @"/usr/bin/dpkg-deb";
@@ -76,15 +67,13 @@
     
     NSArray *arguments = @[@"-b", self.workingDirectoryURL.path];
     BOOL buildSuccess = [NSTask syncronouslyExecute:dpkgPath arguments:arguments output:nil];
-    if (buildSuccess) {
+    if (buildSuccess)
         [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
-        printf("%s Успешно собран\n", packageID);
-    } else {
-        error_log("Сборка %s не удалась.", packageID);
-    }
+    
+    return buildSuccess;
 }
 
-- (BOOL)copyFiles
+- (BOOL)copyFilesWithError:(NSError *_Nullable *_Nullable)error
 {
     __block BOOL operationISsuccess = YES;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -118,7 +107,7 @@
     return operationISsuccess;
 }
 
-- (BOOL)copyMetadata
+- (BOOL)copyMetadataWithError:(NSError *_Nullable *_Nullable)error
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *debianFolder = [self.workingDirectoryURL URLByAppendingPathComponent:@"DEBIAN"];
@@ -130,7 +119,7 @@
     [packageScripts enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *scriptPath = [NSString stringWithFormat:@"%@.%@", dpkgInfoFolder, obj];
         if ([fileManager fileExistsAtPath:scriptPath]) {
-            NSURL *targetScriptURL = [debianFolder URLByAppendingPathComponent:scriptPath.lastPathComponent];
+            NSURL *targetScriptURL = [debianFolder URLByAppendingPathComponent:obj];
             [fileManager copyItemAtPath:scriptPath toPath:targetScriptURL.path error:nil];
         }
     }];
@@ -138,14 +127,7 @@
     NSMutableString *control = [TWDpkg controlForPackage:self.identifier];
     NSURL *controlURL = [debianFolder URLByAppendingPathComponent:@"control"];
     
-    NSError *controlError = nil;
-    BOOL success = [control writeToURL:controlURL atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    if (controlError) {
-        error_log("Error while creating control file! %s\nStopping...",
-                  controlError.description.UTF8String);
-    }
-    
-    return success;
+    return [control writeToURL:controlURL atomically:YES encoding:NSUTF8StringEncoding error:error];;
 }
 
 @end

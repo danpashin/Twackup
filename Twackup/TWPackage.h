@@ -32,8 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Builds deb from package files.
+ 
+ @return Returns YES if deb was successfully built. Otherwise, returns NO.
  */
-- (void)buildDebAtURL:(NSURL *)tempURL;
+- (BOOL)buildDebAtURL:(NSURL *)tempURL error:(NSError *_Nullable *_Nullable)error;
 
 @end
 

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableString * _Nullable)controlForPackage:(NSString *)package;
 
 
-+ (TWPackage *)packageForIdentifier:(NSString *)packageID;
++ (TWPackage * _Nullable)packageForIdentifier:(NSString *)packageID;
 
 
 + (NSRegularExpression * _Nullable)regexForControlLineNamed:(NSString *)lineName;

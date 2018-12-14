@@ -40,7 +40,7 @@
     return @[];
 }
 
-+ (TWPackage *)packageForIdentifier:(NSString *)packageID
++ (TWPackage * _Nullable)packageForIdentifier:(NSString *)packageID
 {
     if ([packageID hasPrefix:@"gsc."] || [packageID hasPrefix:@"cy+"] || packageID.length == 0)
         return nil;

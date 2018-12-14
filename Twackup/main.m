@@ -22,9 +22,14 @@ int main(int argc, const char * argv[])
     strictCopy = arguments[@"-strict"] ? YES : NO;
     
     if (arguments[@"-a"] || arguments[@"--all"]) {
-        [TWackup rebuildAllPackages];
-    } else if (arguments[@"-i"] || arguments[@"--identifier"]) {
-        NSArray <NSString *> *identifiers = arguments[@"-i"] ?: arguments[@"--identifier"];
+        
+        if (arguments[@"-z"]) {
+            [TWackup rebuildAllPackagesAndArchive];
+        } else {
+            [TWackup rebuildAllPackages];
+        }
+    } else if (arguments[@"-b"] || arguments[@"--build"]) {
+        NSArray <NSString *> *identifiers = arguments[@"-b"] ?: arguments[@"--build"];
         [identifiers enumerateObjectsUsingBlock:^(NSString * _Nonnull packageID, NSUInteger idx, BOOL * _Nonnull stop) {
             [TWackup rebuildPackageWithIdentifier:packageID];
         }];
@@ -39,10 +44,10 @@ void printHelpMessage(void)
 {
     printf("Использование:" "\n"
            "-a --all Делает копирование всех установленных твиков в .deb" "\n"
-//           "-z Упаковывает все обработанные .deb архивы в один zip архив" "\n"
-//           "Эти два параметра можно использовать совместно" "\n"
+           "-z Упаковывает все обработанные .deb архивы в один zip архив" "\n"
+           "Эти два параметра можно использовать совместно" "\n"
            "\n"
-           "-i --identifier [идентификатор_пакета] Делает копирование пакета с указанным идентификатором в .deb" "\n"
+           "-b --build [идентификатор_пакета] Делает копирование пакета с указанным идентификатором в .deb" "\n"
            );
 }
 

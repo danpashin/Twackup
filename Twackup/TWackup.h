@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)rebuildAllPackages;
 
 /**
+ Performs syncrous rebuilding and archiving debs in working directory.
+ */
++ (void)rebuildAllPackagesAndArchive;
+
+/**
  Makes syncronous rebuild of the package to deb.
 
  @param identifier Package identifier for rebuild.
