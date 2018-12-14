@@ -22,7 +22,6 @@ int main(int argc, const char * argv[])
     strictCopy = arguments[@"-strict"] ? YES : NO;
     
     if (arguments[@"-a"] || arguments[@"--all"]) {
-        
         if (arguments[@"-z"]) {
             [TWackup rebuildAllPackagesAndArchive];
         } else {
@@ -63,7 +62,7 @@ NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void)
         
         if ([argument hasPrefix:@"-"]) {
             NSMutableArray <NSString *> *postArguments = [NSMutableArray array];
-            for(NSUInteger secondIndex = index + 1; secondIndex < argumentsCount; secondIndex++) {
+            for (NSUInteger secondIndex = index + 1; secondIndex < argumentsCount; secondIndex++) {
                 NSString *nextArgument = arguments[secondIndex];
                 if ([nextArgument hasPrefix:@"-"])
                     break;

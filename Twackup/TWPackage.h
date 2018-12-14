@@ -27,8 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy, nonatomic, readonly) NSString *architecture;
 
+/**
+ Control file of current package.
+ */
+@property (copy, nonatomic, readonly) NSString *control;
 
-- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version architecture:(NSString *)architecture;
+
+- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version
+              architecture:(NSString *)architecture control:(NSString *)control;
 
 /**
  Builds deb from package files.

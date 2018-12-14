@@ -10,6 +10,18 @@
 #import "TWPackage.h"
 #import "NSTask+Twackup.h"
 
+@interface TWDpkg ()
+
+/**
+ Retrieves package control file for specified package.
+ 
+ @param package Package identifier for parsing.
+ @return Returns string of package control. Can return nil, if package not found.
+ */
++ (NSMutableString * _Nullable)controlForPackage:(NSString *)package;
+
+@end
+
 @implementation TWDpkg
 
 + (NSString *)dpkgPath
@@ -22,7 +34,7 @@
     NSData *dpkgOutput = nil;
     
     NSArray *arguments = @[@"-f", @"${binary:Package}\n", @"-W"];
-    if ([NSTask syncronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
+    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
         NSString *packages = [[NSString alloc] initWithData:dpkgOutput
                                                    encoding:NSUTF8StringEncoding];
         
@@ -53,7 +65,7 @@
     NSString *packageArchitecture = [self architectureForControl:control];
     
     return [[TWPackage alloc] initWithID:packageID version:packageVersion
-                            architecture:packageArchitecture];
+                            architecture:packageArchitecture control:control];
 }
 
 + (NSArray <NSString *> *)filesForPackage:(NSString *)packageID
@@ -61,7 +73,7 @@
     NSData *dpkgOutput = nil;
     
     NSArray *arguments = @[@"-L", packageID];
-    if ([NSTask syncronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
+    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
         NSString *allFiles = [[NSString alloc] initWithData:dpkgOutput
                                                    encoding:NSUTF8StringEncoding];
         return [allFiles componentsSeparatedByString:@"\n"];
@@ -75,7 +87,7 @@
     NSData *packageControl = nil;
     
     NSArray *arguments = @[@"-s", packageID];
-    if ([NSTask syncronouslyExecute:self.dpkgPath arguments:arguments output:&packageControl] && packageControl) {
+    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&packageControl] && packageControl) {
         NSMutableString *controlString = [[NSMutableString alloc] initWithData:packageControl encoding:NSUTF8StringEncoding];
         if (!controlString)
             return nil;
@@ -92,7 +104,7 @@
     return nil;
 }
 
-+ (NSRegularExpression * _Nullable)regexForControlLineNamed:(NSString *)lineName
++ (NSRegularExpression *)regexForControlLineNamed:(NSString *)lineName
 {
     NSString *pattern = [NSString stringWithFormat:@"(%@: .*)\n", lineName];
     return [NSRegularExpression regularExpressionWithPattern:pattern

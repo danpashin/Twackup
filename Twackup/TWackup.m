@@ -95,7 +95,14 @@
     }
     
     NSURL *workingDirectoryURL = [self workingDirectoryURL];
-    [package buildDebAtURL:workingDirectoryURL error:nil];
+    
+    NSError *error = nil;
+    BOOL buildSuccess = [package buildDebAtURL:workingDirectoryURL error:&error];
+    if (buildSuccess) {
+        printf("%s Успешно собран\n", identifier.UTF8String);
+    } else {
+        error_log("Сборка %s не удалась.\n%s", identifier.UTF8String, error.description.UTF8String);
+    }
 }
 
 + (NSURL * _Nullable)workingDirectoryURL

@@ -11,7 +11,7 @@
 
 @implementation NSTask (Twackup)
 
-+ (BOOL)syncronouslyExecute:(NSString *)executablePath
++ (BOOL)synchronouslyExecute:(NSString *)executablePath
                   arguments:(NSArray <NSString *> * _Nullable)arguments
                      output:(NSData * _Nullable * _Nullable)output
 {

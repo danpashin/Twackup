@@ -16,13 +16,15 @@
 
 @implementation TWPackage
 
-- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version architecture:(NSString *)architecture
+- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version
+              architecture:(NSString *)architecture control:(NSString *)control
 {
     self = [super init];
     if (self) {
         _identifier = identifier;
         _version = version;
         _architecture = architecture;
+        _control = control;
     }
     return self;
 }
@@ -49,15 +51,11 @@
     if (!directoryCreated)
         return NO;
     
-    if (![self copyFilesWithError:error]) {
-        [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
+    if (![self copyFilesWithError:error])
         return NO;
-    }
     
-    if (![self copyMetadataWithError:error]) {
-        [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
+    if (![self copyMetadataWithError:error])
         return NO;
-    }
     
     NSString *dpkgPath = @"/usr/bin/dpkg-deb";
 //    NSString *compressionQuality = @"-Zlzma";
@@ -66,7 +64,7 @@
 //    }
     
     NSArray *arguments = @[@"-b", self.workingDirectoryURL.path];
-    BOOL buildSuccess = [NSTask syncronouslyExecute:dpkgPath arguments:arguments output:nil];
+    BOOL buildSuccess = [NSTask synchronouslyExecute:dpkgPath arguments:arguments output:nil];
     if (buildSuccess)
         [fileManager removeItemAtURL:self.workingDirectoryURL error:nil];
     
@@ -84,7 +82,7 @@
         if ([obj isEqualToString:@"/."] || obj.length == 0)
             return;
         
-        BOOL isDirectory = [obj hasSuffix:@".app"];
+        BOOL isDirectory = NO;
         [fileManager fileExistsAtPath:obj isDirectory:&isDirectory];
         
         NSError *copyingError = nil;
@@ -96,11 +94,8 @@
             [fileManager copyItemAtPath:obj toPath:fileURL.path error:&copyingError];
         }
         
-        if (copyingError && strictCopy) {
-            error_log("Error while creating item in temporary directory! %s\nStopping...",
-                      copyingError.description.UTF8String);
-            *stop = YES;
-            operationISsuccess = NO;
+        if (copyingError) {
+            error_log("%s\n", copyingError.description.UTF8String);
         }
     }];
     
@@ -113,21 +108,21 @@
     NSURL *debianFolder = [self.workingDirectoryURL URLByAppendingPathComponent:@"DEBIAN"];
     [fileManager createDirectoryAtURL:debianFolder withIntermediateDirectories:NO attributes:nil error:nil];
     
-    NSString *dpkgInfoFolder = [NSString stringWithFormat:@"/var/lib/dpkg/info/%@", self.identifier];
+    NSString *infoFolder = @"/var/lib/dpkg/info/";
+    NSArray <NSString *> *debianFiles = [fileManager contentsOfDirectoryAtPath:infoFolder error:nil];
     
-    NSArray <NSString *> *packageScripts = @[@"preinst", @"postinst", @"prerm", @"postrm", @"extrainst_"];
-    [packageScripts enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *scriptPath = [NSString stringWithFormat:@"%@.%@", dpkgInfoFolder, obj];
-        if ([fileManager fileExistsAtPath:scriptPath]) {
-            NSURL *targetScriptURL = [debianFolder URLByAppendingPathComponent:obj];
-            [fileManager copyItemAtPath:scriptPath toPath:targetScriptURL.path error:nil];
-        }
+    NSString *regexPattern = [NSString stringWithFormat:@"(%@\\.(?!(list|md5sums)))\\w+", self.identifier];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self MATCHES [c] %@", regexPattern];
+    debianFiles = [debianFiles filteredArrayUsingPredicate:predicate];
+    
+    [debianFiles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *fullPath = [NSString stringWithFormat:@"%@/%@", infoFolder, obj];
+        NSURL *targetScriptURL = [debianFolder URLByAppendingPathComponent:obj.pathExtension];
+        [fileManager copyItemAtPath:fullPath toPath:targetScriptURL.path error:nil];
     }];
     
-    NSMutableString *control = [TWDpkg controlForPackage:self.identifier];
     NSURL *controlURL = [debianFolder URLByAppendingPathComponent:@"control"];
-    
-    return [control writeToURL:controlURL atomically:YES encoding:NSUTF8StringEncoding error:error];;
+    return [self.control writeToURL:controlURL atomically:YES encoding:NSUTF8StringEncoding error:error];
 }
 
 @end

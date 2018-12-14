@@ -13,14 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSTask (Twackup)
 
 /**
- Синхронно выполняет системную команду.
+ Synchronously executes system command.
 
- @param executablePath Полный путь к выполняемому бинарникую
- @param arguments Аргументы для команды.
- @param output Возвращает данные, полученные в процессе выполнения команды.
- @return Возвращает YES в случае успеха.
+ @param executablePath The full path to the executable file.
+ @param arguments Arguments that will be given to executable.
+ @param output Return executable output.
+ @return If executable was terminated with success status, returns YES. Otherwise returns NO.
  */
-+ (BOOL)syncronouslyExecute:(NSString *)executablePath
++ (BOOL)synchronouslyExecute:(NSString *)executablePath
                   arguments:(NSArray <NSString *> * _Nullable)arguments
                      output:(NSData * _Nullable * _Nullable)output;
 

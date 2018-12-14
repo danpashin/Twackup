@@ -13,17 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TWackup : NSObject
 
 /**
- Makes syncronous rebuild of all packages to deb archives.
+ Makes synchronous rebuild of all packages to deb archives.
  */
 + (void)rebuildAllPackages;
 
 /**
- Performs syncrous rebuilding and archiving debs in working directory.
+ Performs synchronous rebuilding and archiving debs in working directory.
  */
 + (void)rebuildAllPackagesAndArchive;
 
 /**
- Makes syncronous rebuild of the package to deb.
+ Makes synchronous rebuild of the package to deb.
 
  @param identifier Package identifier for rebuild.
  */
