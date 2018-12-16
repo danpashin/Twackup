@@ -118,7 +118,9 @@
     [debianFiles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *fullPath = [NSString stringWithFormat:@"%@/%@", infoFolder, obj];
         NSURL *targetScriptURL = [debianFolder URLByAppendingPathComponent:obj.pathExtension];
+        
         [fileManager copyItemAtPath:fullPath toPath:targetScriptURL.path error:nil];
+        [fileManager setAttributes:@{NSFilePosixPermissions:@(0775)} ofItemAtPath:targetScriptURL.path error:nil];
     }];
     
     NSURL *controlURL = [debianFolder URLByAppendingPathComponent:@"control"];
