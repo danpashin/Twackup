@@ -51,7 +51,7 @@
     if (!directoryCreated)
         return NO;
     
-    if (![self copyFilesWithError:error])
+    if (![self copyFiles])
         return NO;
     
     if (![self copyMetadataWithError:error])
@@ -71,9 +71,8 @@
     return buildSuccess;
 }
 
-- (BOOL)copyFilesWithError:(NSError *_Nullable *_Nullable)error
+- (BOOL)copyFiles
 {
-    __block BOOL operationISsuccess = YES;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSArray <NSString *> *packageFiles = [TWDpkg filesForPackage:self.identifier];
@@ -94,12 +93,12 @@
             [fileManager copyItemAtPath:obj toPath:fileURL.path error:&copyingError];
         }
         
-        if (copyingError) {
-            error_log("%s\n", copyingError.description.UTF8String);
+        if (copyingError && debugEnabled) {
+            error_log("%s", copyingError.localizedDescription.UTF8String);
         }
     }];
     
-    return operationISsuccess;
+    return YES;
 }
 
 - (BOOL)copyMetadataWithError:(NSError *_Nullable *_Nullable)error
@@ -111,7 +110,8 @@
     NSString *infoFolder = @"/var/lib/dpkg/info/";
     NSArray <NSString *> *debianFiles = [fileManager contentsOfDirectoryAtPath:infoFolder error:nil];
     
-    NSString *regexPattern = [NSString stringWithFormat:@"(%@\\.(?!(list|md5sums)))\\w+", self.identifier];
+    NSString *regexSafeIdentifier = [self.identifier stringByReplacingOccurrencesOfString:@"." withString:@"\\."];
+    NSString *regexPattern = [NSString stringWithFormat:@"(%@\\.(?!(list|md5sums)))\\w+", regexSafeIdentifier];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self MATCHES [c] %@", regexPattern];
     debianFiles = [debianFiles filteredArrayUsingPredicate:predicate];
     

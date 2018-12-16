@@ -47,7 +47,7 @@
         printf("\nКопирование успешно завершено! Перейдите в '%s' для просмотра архива.\n",
                workingDirectory.URLByDeletingLastPathComponent.path.UTF8String);
     } else if (failedCount == 0 && !archiveSuccess) {
-        printf("\nПакеты успешно собраны, но архивирование не удалось. Перейдите в '%s' для просмотра .deb пакетов\n",
+        printf("\nПакеты успешно собраны, но архивирование не удалось. Перейдите в '%s' для просмотра deb-файлов.\n",
                workingDirectory.path.UTF8String);
     } else {
         printf("\nКопирование прошло успешно, но следующие пакеты собрать не удалось:\n%s\n",
@@ -60,7 +60,7 @@
     printf("Подготовка пакетов. Пожалуйста, подождите...\n");
     
     NSArray <TWPackage *> *allPackages = [TWDpkg allPackages];
-    printf("Найден(о) %lu пакет.\n", (unsigned long)allPackages.count);
+    printf("Найден(о) %lu пакет(а/ов).\n", (unsigned long)allPackages.count);
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
     operationQueue.maxConcurrentOperationCount = 5;
@@ -76,7 +76,7 @@
                 error_log("Сборка %s не удалась.", package.identifier.UTF8String);
                 [localFailed addObject:package.identifier];
             } else {
-                printf("%s Успешно собран\n", package.identifier.UTF8String);
+                printf("Готово: %s\n", package.identifier.UTF8String);
             }
         }];
     }];
@@ -99,7 +99,7 @@
     NSError *error = nil;
     BOOL buildSuccess = [package buildDebAtURL:workingDirectoryURL error:&error];
     if (buildSuccess) {
-        printf("%s Успешно собран\n", identifier.UTF8String);
+        printf("Готово: %s\n", identifier.UTF8String);
     } else {
         error_log("Сборка %s не удалась.\n%s", identifier.UTF8String, error.description.UTF8String);
     }
@@ -129,7 +129,7 @@
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     dateFormatter.dateFormat = @"dd-MM-yyyy_HH:mm";
     NSString *filename = [NSString stringWithFormat:@"twackup_%@.zip", [dateFormatter stringFromDate:[NSDate date]]];
-    NSURL *zipFolderURL = [directoryURL URLByAppendingPathComponent:filename];
+    NSURL *zipFolderURL = [directoryURL.URLByDeletingLastPathComponent URLByAppendingPathComponent:filename];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray <NSString *> *debsNames = [fileManager contentsOfDirectoryAtPath:directoryURL.path error:nil];

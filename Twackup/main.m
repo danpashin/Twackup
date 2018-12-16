@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TWackup.h"
 
-BOOL strictCopy = NO;
+BOOL debugEnabled = NO;
 
 void printHelpMessage(void);
 NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void);
@@ -19,7 +19,7 @@ NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void);
 int main(int argc, const char * argv[])
 {
     NSDictionary <NSString *, NSArray <NSString *> *> *arguments = parseArgments();
-    strictCopy = arguments[@"-strict"] ? YES : NO;
+    debugEnabled = arguments[@"--debug"] ? YES : NO;
     
     if (arguments[@"-a"] || arguments[@"--all"]) {
         if (arguments[@"-z"]) {
@@ -32,6 +32,8 @@ int main(int argc, const char * argv[])
         [identifiers enumerateObjectsUsingBlock:^(NSString * _Nonnull packageID, NSUInteger idx, BOOL * _Nonnull stop) {
             [TWackup rebuildPackageWithIdentifier:packageID];
         }];
+    } else if (arguments[@"-v"]) {
+        printf("Twackup %s\n", kTWVersion.UTF8String);
     } else {
         printHelpMessage();
     }
@@ -42,11 +44,14 @@ int main(int argc, const char * argv[])
 void printHelpMessage(void)
 {
     printf("Использование:" "\n"
-           "-a --all Делает копирование всех установленных твиков в .deb" "\n"
-           "-z Упаковывает все обработанные .deb архивы в один zip архив" "\n"
-           "Эти два параметра можно использовать совместно" "\n"
+           "    -a|--all Собирает все установленные твики в deb-файлы." "\n"
+           "    -z  Упаковывает все обработанные deb-файлы в один zip-архив." "\n"
+           "    Эти два параметра можно использовать совместно." "\n"
            "\n"
-           "-b --build [идентификатор_пакета] Делает копирование пакета с указанным идентификатором в .deb" "\n"
+           "    -b|--build [идентификаторы пакетов] Собирает пакеты с указанными идентификаторами в deb-файлы." "\n"
+           "\n"
+           "    -v Показывает версию утилиты." "\n"
+           "    --debug Shows debug info while copying files" "\n"
            );
 }
 
