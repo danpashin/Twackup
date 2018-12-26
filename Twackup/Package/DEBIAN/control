@@ -11,4 +11,6 @@ dev: danpashin
 Tag: purpose::console, compatible::ios8, compatible::ios9, compatible::ios10, compatible::ios11
 Section: Utilities
 Installed-size: PACKAGE_SIZE
-Depiction: https://danpashin.ru/repo/depictions/?pack=ru.danpashin.twackup
+Depiction: https://danpashin.ru/repo/depictions?package=ru.danpashin.twackup
+SileoDepiction: https://danpashin.ru/repo/depictions?package=ru.danpashin.twackup
+
