@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TWackup.h"
+#import "TWLocalizable.h"
 
 BOOL debugEnabled = NO;
 
@@ -33,7 +34,7 @@ int main(int argc, const char * argv[])
             [TWackup rebuildPackageWithIdentifier:packageID];
         }];
     } else if (arguments[@"-v"]) {
-        printf("Twackup %s\n", kTWVersion.UTF8String);
+        printf("Twackup v%s (Builded %s in %s)\n", kTWVersion.UTF8String, __DATE__, __TIME__);
     } else {
         printHelpMessage();
     }
@@ -43,16 +44,7 @@ int main(int argc, const char * argv[])
 
 void printHelpMessage(void)
 {
-    printf("Использование:" "\n"
-           "    -a|--all Собирает все установленные твики в deb-файлы." "\n"
-           "    -z  Упаковывает все обработанные deb-файлы в один zip-архив." "\n"
-           "    Эти два параметра можно использовать совместно." "\n"
-           "\n"
-           "    -b|--build [идентификаторы пакетов] Собирает пакеты с указанными идентификаторами в deb-файлы." "\n"
-           "\n"
-           "    -v Показывает версию утилиты." "\n"
-           "    --debug Shows debug info while copying files" "\n"
-           );
+    printf("%s", TWLocalizable.helpMessage);
 }
 
 

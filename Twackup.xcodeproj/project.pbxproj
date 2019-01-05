@@ -10,6 +10,14 @@
 		206BBEE2724D72F094A4FB9C /* libPods-twackup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */; };
 		A50F041821BA548F00859738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50F041721BA548F00859738 /* Foundation.framework */; };
 		A50F041B21BA548F00859738 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A50F041A21BA548F00859738 /* main.m */; };
+		A53CC71221E0966000848785 /* TWLocalizable.h in Headers */ = {isa = PBXBuildFile; fileRef = A53CC71021E0966000848785 /* TWLocalizable.h */; };
+		A53CC71321E0966000848785 /* TWLocalizable.m in Sources */ = {isa = PBXBuildFile; fileRef = A53CC71121E0966000848785 /* TWLocalizable.m */; };
+		A53CC71F21E0A3B400848785 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A50F041A21BA548F00859738 /* main.m */; };
+		A53CC72021E0A3B400848785 /* TWackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21CF21BEBA9E008F3DE9 /* TWackup.m */; };
+		A53CC72121E0A3B400848785 /* TWDpkg.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */; };
+		A53CC72221E0A3B400848785 /* TWPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C95D21BA84BB003DE3C5 /* TWPackage.m */; };
+		A53CC72321E0A3B400848785 /* NSTask+Twackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */; };
+		A53CC72421E0A3B400848785 /* TWLocalizable.m in Sources */ = {isa = PBXBuildFile; fileRef = A53CC71121E0966000848785 /* TWLocalizable.m */; };
 		A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C95921BA81D0003DE3C5 /* NSTask.h */; };
 		A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */ = {isa = PBXBuildFile; fileRef = A569C95C21BA84BB003DE3C5 /* TWPackage.h */; };
 		A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = A569C95D21BA84BB003DE3C5 /* TWPackage.m */; };
@@ -19,16 +27,35 @@
 		A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21CF21BEBA9E008F3DE9 /* TWackup.m */; };
 		A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */ = {isa = PBXBuildFile; fileRef = A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */; };
 		A57A21D521BEBE9E008F3DE9 /* TWDpkg.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */; };
+		C1CD047576C288B18F6CB2A9 /* libPods-twackup_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7827BD552AC2CE4E5679B /* libPods-twackup_macos.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A53CC71621E0A3A200848785 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup.release.xcconfig"; path = "Pods/Target Support Files/Pods-twackup/Pods-twackup.release.xcconfig"; sourceTree = "<group>"; };
+		28EBD4F69443170320B02209 /* Pods-twackup_macos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup_macos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twackup_macos/Pods-twackup_macos.debug.xcconfig"; sourceTree = "<group>"; };
 		56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twackup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		685A7443733C4172DC7F3777 /* Pods-twackup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twackup/Pods-twackup.debug.xcconfig"; sourceTree = "<group>"; };
+		8BC7827BD552AC2CE4E5679B /* libPods-twackup_macos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twackup_macos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E45D95DEEBDDC8203C4B72D /* Pods-twackup_macos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup_macos.release.xcconfig"; path = "Pods/Target Support Files/Pods-twackup_macos/Pods-twackup_macos.release.xcconfig"; sourceTree = "<group>"; };
 		A50F041421BA548F00859738 /* twackup */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = twackup; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50F041721BA548F00859738 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A50F041A21BA548F00859738 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A50F041E21BA548F00859738 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		A53CC71021E0966000848785 /* TWLocalizable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWLocalizable.h; sourceTree = "<group>"; };
+		A53CC71121E0966000848785 /* TWLocalizable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWLocalizable.m; sourceTree = "<group>"; };
+		A53CC71821E0A3A200848785 /* twackup_macos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = twackup_macos; sourceTree = BUILT_PRODUCTS_DIR; };
 		A569C95921BA81D0003DE3C5 /* NSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTask.h; sourceTree = "<group>"; };
 		A569C95B21BA830A003DE3C5 /* sign.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = sign.entitlements; sourceTree = "<group>"; };
 		A569C95C21BA84BB003DE3C5 /* TWPackage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWPackage.h; sourceTree = "<group>"; };
@@ -52,6 +79,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A53CC71521E0A3A200848785 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1CD047576C288B18F6CB2A9 /* libPods-twackup_macos.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				A50F041421BA548F00859738 /* twackup */,
+				A53CC71821E0A3A200848785 /* twackup_macos */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +116,7 @@
 			children = (
 				A50F041721BA548F00859738 /* Foundation.framework */,
 				56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */,
+				8BC7827BD552AC2CE4E5679B /* libPods-twackup_macos.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,6 +133,8 @@
 				A569C95D21BA84BB003DE3C5 /* TWPackage.m */,
 				A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */,
 				A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */,
+				A53CC71021E0966000848785 /* TWLocalizable.h */,
+				A53CC71121E0966000848785 /* TWLocalizable.m */,
 				A569C95921BA81D0003DE3C5 /* NSTask.h */,
 				A50F041C21BA548F00859738 /* Package */,
 			);
@@ -139,6 +178,8 @@
 			children = (
 				685A7443733C4172DC7F3777 /* Pods-twackup.debug.xcconfig */,
 				1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */,
+				28EBD4F69443170320B02209 /* Pods-twackup_macos.debug.xcconfig */,
+				8E45D95DEEBDDC8203C4B72D /* Pods-twackup_macos.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -152,6 +193,7 @@
 			files = (
 				A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */,
 				A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */,
+				A53CC71221E0966000848785 /* TWLocalizable.h in Headers */,
 				A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */,
 				A57A21D021BEBA9E008F3DE9 /* TWackup.h in Headers */,
 				A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */,
@@ -180,6 +222,24 @@
 			productReference = A50F041421BA548F00859738 /* twackup */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		A53CC71721E0A3A200848785 /* twackup_macos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A53CC71C21E0A3A200848785 /* Build configuration list for PBXNativeTarget "twackup_macos" */;
+			buildPhases = (
+				3C18D7A29B99D8EAFA80719E /* [CP] Check Pods Manifest.lock */,
+				A53CC71421E0A3A200848785 /* Sources */,
+				A53CC71521E0A3A200848785 /* Frameworks */,
+				A53CC71621E0A3A200848785 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = twackup_macos;
+			productName = twackup_macos;
+			productReference = A53CC71821E0A3A200848785 /* twackup_macos */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -191,6 +251,9 @@
 				ORGANIZATIONNAME = "Даниил";
 				TargetAttributes = {
 					A50F041321BA548F00859738 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					A53CC71721E0A3A200848785 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -208,11 +271,34 @@
 			projectRoot = "";
 			targets = (
 				A50F041321BA548F00859738 /* twackup */,
+				A53CC71721E0A3A200848785 /* twackup_macos */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3C18D7A29B99D8EAFA80719E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-twackup_macos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A50F041221BA548F00859738 /* Copy files and build deb */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +352,20 @@
 				A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */,
 				A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */,
 				A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */,
+				A53CC71321E0966000848785 /* TWLocalizable.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A53CC71421E0A3A200848785 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53CC72121E0A3B400848785 /* TWDpkg.m in Sources */,
+				A53CC72221E0A3B400848785 /* TWPackage.m in Sources */,
+				A53CC71F21E0A3B400848785 /* main.m in Sources */,
+				A53CC72021E0A3B400848785 /* TWackup.m in Sources */,
+				A53CC72321E0A3B400848785 /* NSTask+Twackup.m in Sources */,
+				A53CC72421E0A3B400848785 /* TWLocalizable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +572,32 @@
 			};
 			name = Release;
 		};
+		A53CC71D21E0A3A200848785 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28EBD4F69443170320B02209 /* Pods-twackup_macos.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW97WHTS78;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A53CC71E21E0A3A200848785 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E45D95DEEBDDC8203C4B72D /* Pods-twackup_macos.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VW97WHTS78;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -489,6 +615,15 @@
 			buildConfigurations = (
 				A50F042621BA548F00859738 /* Debug */,
 				A50F042721BA548F00859738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A53CC71C21E0A3A200848785 /* Build configuration list for PBXNativeTarget "twackup_macos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53CC71D21E0A3A200848785 /* Debug */,
+				A53CC71E21E0A3A200848785 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

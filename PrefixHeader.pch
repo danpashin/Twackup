@@ -11,8 +11,8 @@
 #define TWStringize_internal(string) #string
 #define TWStringize(string) @TWStringize_internal(string)
 
-#define error_log(string, ...)\
-    printf("%s:%i '" string "'\n\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, ##__VA_ARGS__ )
+#define error_log(format, ...)\
+    printf("%s:%i '" format "'\n\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, ##__VA_ARGS__ )
 
 
 extern BOOL debugEnabled;

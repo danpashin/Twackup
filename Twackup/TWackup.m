@@ -10,6 +10,7 @@
 #import "TWPackage.h"
 #import "TWDpkg.h"
 #import <SSZipArchive.h>
+#import "TWLocalizable.h"
 
 @interface TWackup ()
 + (NSURL * _Nullable)workingDirectoryURL;
@@ -25,10 +26,10 @@
     [self _rebuildAllPackagesAtURL:workingDirectory failed:&failedPackages];
     
     if (failedPackages.count == 0) {
-        printf("\nКопирование успешно завершено! Перейдите в '%s' для просмотра .deb пакетов.\n",
+        printf([TWLocalizable :"\nBackup successfully finished! Go to '%s' for .deb packages.\n"],
                workingDirectory.path.UTF8String);
     } else {
-        printf("\nКопирование прошло успешно, но следующие пакеты собрать не удалось:\n%s\n",
+        printf([TWLocalizable :"\nBackup was successful, however, the following packages could not be built:\n%s\n"],
                failedPackages.description.UTF8String);
     }
 }
@@ -44,23 +45,23 @@
     
     
     if (failedCount == 0 && archiveSuccess) {
-        printf("\nКопирование успешно завершено! Перейдите в '%s' для просмотра архива.\n",
+        printf([TWLocalizable :"\nBackup completed successfully! Go to '%s ' to view the archive.\n"],
                workingDirectory.URLByDeletingLastPathComponent.path.UTF8String);
     } else if (failedCount == 0 && !archiveSuccess) {
-        printf("\nПакеты успешно собраны, но архивирование не удалось. Перейдите в '%s' для просмотра deb-файлов.\n",
+        printf([TWLocalizable :"\nPackages were successfully built, but archiving failed. Go to '%s' to view deb files.\n"],
                workingDirectory.path.UTF8String);
     } else {
-        printf("\nКопирование прошло успешно, но следующие пакеты собрать не удалось:\n%s\n",
+        printf([TWLocalizable :"\nCopying was successful, but the following packages could not be built:\n%s\n"],
                failedPackages.description.UTF8String);
     }
 }
 
 + (void)_rebuildAllPackagesAtURL:(NSURL *)workingDirectory failed:(NSMutableArray *_Nonnull *_Nullable)failedPackages
 {
-    printf("Подготовка пакетов. Пожалуйста, подождите...\n");
+    printf("%s", [TWLocalizable :"Preparing packages. Please, wait...\n"]);
     
     NSArray <TWPackage *> *allPackages = [TWDpkg allPackages];
-    printf("Найден(о) %lu пакет(а/ов).\n", (unsigned long)allPackages.count);
+    printf([TWLocalizable :"Found %lu packages.\n"], (unsigned long)allPackages.count);
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
     operationQueue.maxConcurrentOperationCount = 5;
@@ -73,10 +74,10 @@
             NSError *buildError = nil;
             BOOL buildSuccess = [package buildDebAtURL:workingDirectory error:&buildError];
             if (!buildSuccess) {
-                error_log("Сборка %s не удалась.", package.identifier.UTF8String);
+                error_log("Package %s failed.", package.identifier.UTF8String);
                 [localFailed addObject:package.identifier];
             } else {
-                printf("Готово: %s\n", package.identifier.UTF8String);
+                printf([TWLocalizable :"Done: %s\n."], package.identifier.UTF8String);
             }
         }];
     }];
@@ -90,7 +91,7 @@
 {
     TWPackage *package = [TWDpkg packageForIdentifier:identifier];
     if (!package) {
-        error_log("Пакет %s не найден!", identifier.UTF8String);
+        error_log("Package %s not found!", identifier.UTF8String);
         return;
     }
     
@@ -99,9 +100,9 @@
     NSError *error = nil;
     BOOL buildSuccess = [package buildDebAtURL:workingDirectoryURL error:&error];
     if (buildSuccess) {
-        printf("Готово: %s\n", identifier.UTF8String);
+        printf([TWLocalizable :"Done: %s\n"], identifier.UTF8String);
     } else {
-        error_log("Сборка %s не удалась.\n%s", identifier.UTF8String, error.description.UTF8String);
+        error_log("Package %s not found.\n%s", identifier.UTF8String, error.description.UTF8String);
     }
 }
 
@@ -114,8 +115,8 @@
         [fileManager createDirectoryAtURL:workingDirectory withIntermediateDirectories:NO attributes:nil error:nil];
     
     if (access(workingDirectory.path.UTF8String, W_OK) != 0) {
-        error_log("Утилита не имеет прав на запись в рабочую папку.\n"
-                  "Пожалуйста, убедитесь, что утилита запущена от пользователя root.");
+        error_log("The utility does not have write access to the working folder.\n"
+                  "Please make sure that the utility is running as root.");
         exit(EXIT_FAILURE);
     }
     

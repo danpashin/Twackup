@@ -1,7 +1,12 @@
 
-platform :ios, '8.0'
 
 target 'twackup' do
+  platform :ios, '8.0'
+  pod 'SSZipArchive'
+end
+
+target 'twackup_macos' do
+  platform :osx, '10.10'
   pod 'SSZipArchive'
 end
 

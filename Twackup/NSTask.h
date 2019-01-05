@@ -2,6 +2,9 @@
 	Copyright (c) 1996-2018, Apple Inc. All rights reserved.
 */
 
+
+#if defined(__arm__) || defined(__arm64__)
+
 #import <Foundation/NSObject.h>
 #import <Foundation/NSNotification.h>
 
@@ -86,3 +89,5 @@ A block to be invoked when the process underlying the NSTask terminates.  Settin
 FOUNDATION_EXPORT NSNotificationName const NSTaskDidTerminateNotification;
 
 NS_ASSUME_NONNULL_END
+
+#endif
