@@ -8,7 +8,7 @@ Architecture: iphoneos-arm
 Author: Даниил <admin@danpashin.ru>
 Maintainer:  Даниил <admin@danpashin.ru>
 dev: danpashin
-Tag: purpose::console, compatible::ios8, compatible::ios9, compatible::ios10, compatible::ios11
+Tag: purpose::console, compatible::ios8, compatible::ios9, compatible::ios10, compatible::ios11, compatible::ios12
 Section: Utilities
 Installed-size: PACKAGE_SIZE
 Depiction: https://danpashin.ru/repo/depictions?package=ru.danpashin.twackup
