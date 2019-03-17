@@ -61,11 +61,12 @@
     if (!control)
         return nil;
     
-    NSString *packageVersion = [self versionForControl:control];
-    NSString *packageArchitecture = [self architectureForControl:control];
+    NSString *version = [self valueForKey:@"Version" inControl:control];
+    NSString *architecture = [self valueForKey:@"Architecture" inControl:control];
+    NSString *name = [self valueForKey:@"Name" inControl:control];
     
-    return [[TWPackage alloc] initWithID:packageID version:packageVersion
-                            architecture:packageArchitecture control:control];
+    return [[TWPackage alloc] initWithID:packageID version:version name:name
+                            architecture:architecture control:control];
 }
 
 + (NSArray <NSString *> *)filesForPackage:(NSString *)packageID
@@ -106,41 +107,26 @@
 
 + (NSRegularExpression *)regexForControlLineNamed:(NSString *)lineName
 {
-    NSString *pattern = [NSString stringWithFormat:@"(%@: .*)\n", lineName];
+    NSString *pattern = [NSString stringWithFormat:@"(%@: .*)(\n|\r|\f)", lineName];
     return [NSRegularExpression regularExpressionWithPattern:pattern
                                                      options:NSRegularExpressionCaseInsensitive
                                                        error:nil];
 }
 
-+ (NSString *)versionForControl:(NSString *)control
++ (NSString *)valueForKey:(NSString *)lineName inControl:(NSString *)control
 {
-    NSRegularExpression *versionRegex = [self regexForControlLineNamed:@"Version"];
-    NSRange versionStringRange = [versionRegex firstMatchInString:control options:0
-                                                            range:NSMakeRange(0, control.length)].range;
+    NSRegularExpression *lineRegex = [self regexForControlLineNamed:lineName];
+    NSRange lineRange = [lineRegex firstMatchInString:control options:0
+                                                range:NSMakeRange(0, control.length)].range;
     
-    if (versionStringRange.location != NSNotFound) {
-        NSString *versionString = [control substringWithRange:versionStringRange];
-        versionString = [versionString stringByReplacingOccurrencesOfString:@"Version: " withString:@""];
-        versionString = [versionString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    if (lineRange.location != NSNotFound) {
+        NSString *keyString = [lineName stringByAppendingString:@": "];
         
-        return versionString;
-    }
-    
-    return @"";
-}
-
-+ (NSString *)architectureForControl:(NSString *)control
-{
-    NSRegularExpression *architectureRegex = [self regexForControlLineNamed:@"Architecture"];
-    NSRange architectureStringRange = [architectureRegex firstMatchInString:control options:0
-                                                                      range:NSMakeRange(0, control.length)].range;
-    
-    if (architectureStringRange.location != NSNotFound) {
-        NSString *architecture = [control substringWithRange:architectureStringRange];
-        architecture = [architecture stringByReplacingOccurrencesOfString:@"Architecture: " withString:@""];
-        architecture = [architecture stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSString *valueString = [control substringWithRange:lineRange];
+        valueString = [valueString stringByReplacingOccurrencesOfString:keyString withString:@""];
+        valueString = [valueString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
-        return architecture;
+        return valueString;
     }
     
     return @"";

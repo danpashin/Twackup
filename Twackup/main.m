@@ -22,7 +22,9 @@ int main(int argc, const char * argv[])
     NSDictionary <NSString *, NSArray <NSString *> *> *arguments = parseArgments();
     debugEnabled = arguments[@"--debug"] ? YES : NO;
     
-    if (arguments[@"-a"] || arguments[@"--all"]) {
+    if (arguments[@"-l"] || arguments[@"--list-installed"]) {
+        [TWackup listInstalled];
+    } else if (arguments[@"-a"] || arguments[@"--all"]) {
         if (arguments[@"-z"]) {
             [TWackup rebuildAllPackagesAndArchive];
         } else {
@@ -33,18 +35,13 @@ int main(int argc, const char * argv[])
         [identifiers enumerateObjectsUsingBlock:^(NSString * _Nonnull packageID, NSUInteger idx, BOOL * _Nonnull stop) {
             [TWackup rebuildPackageWithIdentifier:packageID];
         }];
-    } else if (arguments[@"-v"]) {
-        printf("Twackup v%s (Builded %s in %s)\n", kTWVersion.UTF8String, __DATE__, __TIME__);
+    } else if (arguments[@"-v"] || arguments[@"--version"]) {
+        printf("Twackup v%s (Builded on %s %s)\n", kTWVersion.UTF8String, __DATE__, __TIME__);
     } else {
-        printHelpMessage();
+        printf("%s", TWLocalizable.helpMessage);
     }
     
     return EXIT_SUCCESS;
-}
-
-void printHelpMessage(void)
-{
-    printf("%s", TWLocalizable.helpMessage);
 }
 
 

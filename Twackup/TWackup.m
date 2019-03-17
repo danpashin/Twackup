@@ -115,8 +115,8 @@
         [fileManager createDirectoryAtURL:workingDirectory withIntermediateDirectories:NO attributes:nil error:nil];
     
     if (access(workingDirectory.path.UTF8String, W_OK) != 0) {
-        error_log("The utility does not have write access to the working folder.\n"
-                  "Please make sure that the utility is running as root.");
+        error_log("Twackup does not have write access to the working folder.\n"
+                  "Please make sure the utility is running as root.");
         exit(EXIT_FAILURE);
     }
     
@@ -143,6 +143,25 @@
     }];
     
     return [SSZipArchive createZipFileAtPath:zipFolderURL.path withFilesAtPaths:pathsToDebs];
+}
+
++ (void)listInstalled
+{
+    printf("%s", [TWLocalizable :"Preparing packages. Please, wait...\n"]);
+    
+    NSMutableArray <TWPackage *> *allPackages = [[TWDpkg allPackages] mutableCopy];
+    [allPackages sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+    
+    unsigned long counter = 0;
+    for (TWPackage *package in allPackages) {
+        ++counter;
+        
+        if (package.name.length > 0) {
+            printf("%4.lu: %s - %s\n", counter, package.name.UTF8String, package.identifier.UTF8String);
+        } else {
+            printf("%4.lu: %s\n", counter, package.identifier.UTF8String);
+        }
+    }
 }
 
 @end

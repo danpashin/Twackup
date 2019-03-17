@@ -16,13 +16,15 @@
 
 @implementation TWPackage
 
-- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version
+- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version name:(NSString *)name
               architecture:(NSString *)architecture control:(NSString *)control
 {
     self = [super init];
     if (self) {
         _identifier = identifier;
         _version = version;
+        _name = name;
+        
         _architecture = architecture;
         _control = control;
     }

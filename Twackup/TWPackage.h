@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSString *identifier;
 
 /**
+ Name of the package.
+ */
+@property (copy, nonatomic, readonly) NSString *name;
+
+/**
  Package version.
  */
 @property (copy, nonatomic, readonly) NSString *version;
@@ -33,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSString *control;
 
 
-- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version
+- (instancetype)initWithID:(NSString *)identifier version:(NSString *)version name:(NSString *)name
               architecture:(NSString *)architecture control:(NSString *)control;
 
 /**

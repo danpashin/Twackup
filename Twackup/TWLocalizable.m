@@ -63,7 +63,9 @@
         "\n"
         "   -b|--build [идентификаторы пакетов] Собирает пакеты с указанными идентификаторами в deb-файлы." "\n"
         "\n"
-        "   -v Показывает версию утилиты." "\n"
+        "   -l|--list-installed Выводит на экран имена и идентификаторы всех установленных пакетов." "\n"
+        "\n"
+        "   -v|--version Показывает версию утилиты." "\n"
         "   --debug Shows debug info while copying files" "\n";
     }
     
@@ -77,7 +79,9 @@
     "\n"
     "   -b|--build [packages identifiers] Gathers packets with the specified IDs in a .deb files." "\n"
     "\n"
-    "   -v Shows the version of the utility." "\n"
+    "   -l|--list-installed Prints names and identifiers of all installed packages." "\n"
+    "\n"
+    "   -v|--version Shows the version of the utility." "\n"
     "   --debug Shows debug info while copying files" "\n";
     
 }

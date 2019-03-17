@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)rebuildPackageWithIdentifier:(NSString *)identifier;
 
+/**
+ Makes synchronous listing of all installed packages.
+ */
++ (void)listInstalled;
+
 @end
 
 NS_ASSUME_NONNULL_END
