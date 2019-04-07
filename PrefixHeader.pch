@@ -8,12 +8,34 @@
 
 @import Foundation;
 
+#ifndef TWStringize
 #define TWStringize_internal(string) #string
 #define TWStringize(string) @TWStringize_internal(string)
+#endif
+
+#ifndef PRINT_DEF_COLOR
+#define PRINT_DEF_COLOR "\x1B[0m"
+#endif
+
+#ifndef PRINT_RED_COLOR
+#define PRINT_RED_COLOR "\x1B[31m"
+#endif
+
+#ifndef PRINT_YEL_COLOR
+#define PRINT_YEL_COLOR "\x1B[33m"
+#endif
+
+#ifndef PRINT_CYN_COLOR
+#define PRINT_CYN_COLOR "\x1B[36m"
+#endif
+
+
+#ifndef error_log
+#import <libgen.h>
 
 #define error_log(format, ...)\
-    printf("%s:%i '" format "'\n\n", @(__FILE__).lastPathComponent.UTF8String, __LINE__, ##__VA_ARGS__ )
+    printf(PRINT_RED_COLOR "%s:%i " format "\n\n" PRINT_DEF_COLOR, basename(__FILE__), __LINE__, ##__VA_ARGS__ )
+#endif
 
 
-extern BOOL debugEnabled;
 static NSString *const kTWVersion = TWStringize(CURRENT_PROJECT_VERSION);

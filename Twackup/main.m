@@ -10,8 +10,6 @@
 #import "TWackup.h"
 #import "TWLocalizable.h"
 
-BOOL debugEnabled = NO;
-
 void printHelpMessage(void);
 NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void);
 
@@ -20,7 +18,6 @@ NSDictionary <NSString *, NSArray <NSString *> *> *parseArgments(void);
 int main(int argc, const char * argv[])
 {
     NSDictionary <NSString *, NSArray <NSString *> *> *arguments = parseArgments();
-    debugEnabled = arguments[@"--debug"] ? YES : NO;
     
     if (arguments[@"-l"] || arguments[@"--list-installed"]) {
         [TWackup listInstalled];
@@ -38,7 +35,7 @@ int main(int argc, const char * argv[])
     } else if (arguments[@"-v"] || arguments[@"--version"]) {
         printf("Twackup v%s (Builded on %s %s)\n", kTWVersion.UTF8String, __DATE__, __TIME__);
     } else {
-        printf("%s", TWLocalizable.helpMessage);
+        printf("%s", localized_help_message());
     }
     
     return EXIT_SUCCESS;

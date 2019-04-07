@@ -10,12 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TWLocalizable : NSObject
+extern const char *localized(char *string);
 
-+ (const char *):(char *)string;
-
-+ (const char *)helpMessage;
-
-@end
+extern const char *localized_help_message(void);
 
 NS_ASSUME_NONNULL_END

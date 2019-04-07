@@ -17,7 +17,7 @@ Ensure you have CocoaPods installed. If not, install it using command:
 Then clone the repository and install dependencies:
 
 ```
-git clone git@github.com:daniilpashin/Twackup.git
+git clone https://github.com/danpashin/Twackup.git
 cd Twackup
 pod install
 open Twackup.xcworkspace

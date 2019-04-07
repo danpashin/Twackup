@@ -26,10 +26,10 @@
     [self _rebuildAllPackagesAtURL:workingDirectory failed:&failedPackages];
     
     if (failedPackages.count == 0) {
-        printf([TWLocalizable :"\nBackup successfully finished! Go to '%s' for .deb packages.\n"],
+        printf(localized("\nBackup successfully finished! Go to '%s' for .deb packages.\n"),
                workingDirectory.path.UTF8String);
     } else {
-        printf([TWLocalizable :"\nBackup was successful, however, the following packages could not be built:\n%s\n"],
+        printf(localized("\nBackup was successful, however, the following packages could not be built:\n%s\n"),
                failedPackages.description.UTF8String);
     }
 }
@@ -41,43 +41,44 @@
     NSMutableArray <NSString *> *failedPackages = nil;
     [self _rebuildAllPackagesAtURL:workingDirectory failed:&failedPackages];
     const NSUInteger failedCount = failedPackages.count;
+    
+    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR "\n", localized("Archiving..."));
     const BOOL archiveSuccess = [self archiveExistingPackages];
     
     
     if (failedCount == 0 && archiveSuccess) {
-        printf([TWLocalizable :"\nBackup completed successfully! Go to '%s ' to view the archive.\n"],
+        printf(localized("\nBackup completed successfully! Go to '%s' to view the archive.\n"),
                workingDirectory.URLByDeletingLastPathComponent.path.UTF8String);
     } else if (failedCount == 0 && !archiveSuccess) {
-        printf([TWLocalizable :"\nPackages were successfully built, but archiving failed. Go to '%s' to view deb files.\n"],
+        printf(localized("\nPackages were successfully built, but archiving failed. Go to '%s' to view deb files.\n"),
                workingDirectory.path.UTF8String);
     } else {
-        printf([TWLocalizable :"\nCopying was successful, but the following packages could not be built:\n%s\n"],
+        printf(localized("\nCopying was successful, but the following packages could not be built:\n%s\n"),
                failedPackages.description.UTF8String);
     }
 }
 
 + (void)_rebuildAllPackagesAtURL:(NSURL *)workingDirectory failed:(NSMutableArray *_Nonnull *_Nullable)failedPackages
 {
-    printf("%s", [TWLocalizable :"Preparing packages. Please, wait...\n"]);
+    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR, localized("Preparing packages. Please, wait...\n"));
     
     NSArray <TWPackage *> *allPackages = [TWDpkg allPackages];
-    printf([TWLocalizable :"Found %lu packages.\n"], (unsigned long)allPackages.count);
+    printf(PRINT_YEL_COLOR "%s " PRINT_CYN_COLOR "%lu" PRINT_YEL_COLOR " %s." PRINT_DEF_COLOR "\n", 
+           localized("Found"), (unsigned long)allPackages.count, localized("packages"));
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
     operationQueue.maxConcurrentOperationCount = 5;
     operationQueue.name = @"ru.danpashin.twackup.packages.backup";
+    operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
     
     NSMutableArray <NSString *> *localFailed = [NSMutableArray array];
     
     [allPackages enumerateObjectsUsingBlock:^(TWPackage * _Nonnull package, NSUInteger idx, BOOL * _Nonnull stop) {
         [operationQueue addOperationWithBlock:^{
-            NSError *buildError = nil;
-            BOOL buildSuccess = [package buildDebAtURL:workingDirectory error:&buildError];
-            if (!buildSuccess) {
-                error_log("Package %s failed.", package.identifier.UTF8String);
+            printf(PRINT_YEL_COLOR "%s: " PRINT_DEF_COLOR "%s\n", localized("Processing"), package.identifier.UTF8String);
+            
+            if (![self rebuildPackage:package inDirectory:workingDirectory]) {
                 [localFailed addObject:package.identifier];
-            } else {
-                printf([TWLocalizable :"Done: %s\n."], package.identifier.UTF8String);
             }
         }];
     }];
@@ -96,14 +97,20 @@
     }
     
     NSURL *workingDirectoryURL = [self workingDirectoryURL];
-    
+    [self rebuildPackage:package inDirectory:workingDirectoryURL];
+}
+
++ (BOOL)rebuildPackage:(TWPackage *)package inDirectory:(NSURL *)directory
+{
     NSError *error = nil;
-    BOOL buildSuccess = [package buildDebAtURL:workingDirectoryURL error:&error];
+    BOOL buildSuccess = [package buildDebAtURL:directory error:&error];
     if (buildSuccess) {
-        printf([TWLocalizable :"Done: %s\n"], identifier.UTF8String);
+        printf(PRINT_YEL_COLOR "%s: " PRINT_DEF_COLOR "%s\n", localized("Done"), package.identifier.UTF8String);
     } else {
-        error_log("Package %s not found.\n%s", identifier.UTF8String, error.description.UTF8String);
+        error_log("Package %s not found.\n%s", package.identifier.UTF8String, error.description.UTF8String);
     }
+    
+    return buildSuccess;
 }
 
 + (NSURL * _Nullable)workingDirectoryURL
@@ -114,7 +121,7 @@
     if (![fileManager fileExistsAtPath:workingDirectory.path])
         [fileManager createDirectoryAtURL:workingDirectory withIntermediateDirectories:NO attributes:nil error:nil];
     
-    if (access(workingDirectory.path.UTF8String, W_OK) != 0) {
+    if (access(workingDirectory.path.UTF8String, W_OK) != EXIT_SUCCESS) {
         error_log("Twackup does not have write access to the working folder.\n"
                   "Please make sure the utility is running as root.");
         exit(EXIT_FAILURE);
@@ -147,19 +154,20 @@
 
 + (void)listInstalled
 {
-    printf("%s", [TWLocalizable :"Preparing packages. Please, wait...\n"]);
+    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR, localized("Preparing packages. Please, wait...\n"));
     
     NSMutableArray <TWPackage *> *allPackages = [[TWDpkg allPackages] mutableCopy];
     [allPackages sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     
     unsigned long counter = 0;
     for (TWPackage *package in allPackages) {
-        ++counter;
+        printf(PRINT_RED_COLOR "%3.lu" PRINT_DEF_COLOR ": ", ++counter);
         
         if (package.name.length > 0) {
-            printf("%4.lu: %s - %s\n", counter, package.name.UTF8String, package.identifier.UTF8String);
+            printf("%s - " PRINT_CYN_COLOR "%s" PRINT_DEF_COLOR "\n", 
+                   package.name.UTF8String, package.identifier.UTF8String);
         } else {
-            printf("%4.lu: %s\n", counter, package.identifier.UTF8String);
+            printf(PRINT_CYN_COLOR "%s" PRINT_DEF_COLOR "\n", package.identifier.UTF8String);
         }
     }
 }

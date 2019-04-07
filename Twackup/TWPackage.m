@@ -95,7 +95,7 @@
             [fileManager copyItemAtPath:obj toPath:fileURL.path error:&copyingError];
         }
         
-        if (copyingError && debugEnabled) {
+        if (copyingError) {
             error_log("%s", copyingError.localizedDescription.UTF8String);
         }
     }];
