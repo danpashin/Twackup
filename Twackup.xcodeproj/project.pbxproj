@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3BB6F0229876E900BDE0DD /* packages_parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3BB6EE229876E800BDE0DD /* packages_parser.m */; };
+		0B3BB6F1229876E900BDE0DD /* packages_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3BB6EF229876E900BDE0DD /* packages_parser.h */; };
 		206BBEE2724D72F094A4FB9C /* libPods-twackup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */; };
 		A50F041821BA548F00859738 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50F041721BA548F00859738 /* Foundation.framework */; };
 		A50F041B21BA548F00859738 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A50F041A21BA548F00859738 /* main.m */; };
@@ -43,6 +45,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B3BB6EE229876E800BDE0DD /* packages_parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = packages_parser.m; sourceTree = "<group>"; };
+		0B3BB6EF229876E900BDE0DD /* packages_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = packages_parser.h; sourceTree = "<group>"; };
 		1721A09928C4BCDB8763694B /* Pods-twackup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup.release.xcconfig"; path = "Pods/Target Support Files/Pods-twackup/Pods-twackup.release.xcconfig"; sourceTree = "<group>"; };
 		28EBD4F69443170320B02209 /* Pods-twackup_macos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twackup_macos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twackup_macos/Pods-twackup_macos.debug.xcconfig"; sourceTree = "<group>"; };
 		56E75AB9AFE6DA5E37D2ED95 /* libPods-twackup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twackup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +133,8 @@
 				A57A21CF21BEBA9E008F3DE9 /* TWackup.m */,
 				A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */,
 				A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */,
+				0B3BB6EF229876E900BDE0DD /* packages_parser.h */,
+				0B3BB6EE229876E800BDE0DD /* packages_parser.m */,
 				A569C95C21BA84BB003DE3C5 /* TWPackage.h */,
 				A569C95D21BA84BB003DE3C5 /* TWPackage.m */,
 				A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */,
@@ -192,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A569C96221BA8635003DE3C5 /* NSTask+Twackup.h in Headers */,
+				0B3BB6F1229876E900BDE0DD /* packages_parser.h in Headers */,
 				A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */,
 				A53CC71221E0966000848785 /* TWLocalizable.h in Headers */,
 				A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */,
@@ -353,6 +360,7 @@
 				A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */,
 				A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */,
 				A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */,
+				0B3BB6F0229876E900BDE0DD /* packages_parser.m in Sources */,
 				A53CC71321E0966000848785 /* TWLocalizable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +424,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.7;
+				CURRENT_PROJECT_VERSION = 0.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -503,7 +511,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.7;
+				CURRENT_PROJECT_VERSION = 0.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;

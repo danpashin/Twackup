@@ -9,6 +9,7 @@
 #import "TWDpkg.h"
 #import "TWPackage.h"
 #import "NSTask+Twackup.h"
+#import "packages_parser.h"
 
 @interface TWDpkg ()
 
@@ -31,26 +32,41 @@
 
 + (NSArray <TWPackage *> *)allPackages
 {
-    NSData *dpkgOutput = nil;
+    NSMutableArray <TWPackage *> *allPackages = [NSMutableArray array];
+    parse_packages_file("/var/lib/dpkg/status", ^(NSString * _Nonnull package_description) {
+        TWPackage *package = [self packageForControl:package_description];
+        if (package) {
+            [allPackages addObject:package];
+        }
+    });
     
-    NSArray *arguments = @[@"-f", @"${binary:Package}\n", @"-W"];
-    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
-        NSString *packages = [[NSString alloc] initWithData:dpkgOutput
-                                                   encoding:NSUTF8StringEncoding];
-        
-        NSMutableArray <TWPackage *> *allPackages = [NSMutableArray array];
-        [packages enumerateLinesUsingBlock:^(NSString * _Nonnull packageID, BOOL * _Nonnull stop) {
-            TWPackage *package = [self packageForIdentifier:packageID];
-            if (package) {
-                [allPackages addObject:package];
-            }
-        }];
-        
-        return allPackages;
-    }
-    
-    return @[];
+    return allPackages;
 }
+
++ (TWPackage * _Nullable)packageForControl:(NSString *)control
+{
+    NSString *identifier = [self valueForKey:@"Package" inControl:control];
+    if ([identifier hasPrefix:@"gsc."] || [identifier hasPrefix:@"cy+"] || identifier.length == 0)
+        return nil;
+    
+    NSString *version = [self valueForKey:@"Version" inControl:control];
+    NSString *architecture = [self valueForKey:@"Architecture" inControl:control];
+    NSString *name = [self valueForKey:@"Name" inControl:control];
+    
+    NSMutableString *mutableControl = [control mutableCopy];
+    
+    NSRegularExpression *statusRegex = [self regexForControlLineNamed:@"Status"];
+    [statusRegex replaceMatchesInString:mutableControl options:0 range:NSMakeRange(0, mutableControl.length) withTemplate:@""];
+    
+    NSRegularExpression *controlVersionRegex = [self regexForControlLineNamed:@"Config-Version"];
+    [controlVersionRegex replaceMatchesInString:mutableControl options:0 range:NSMakeRange(0, mutableControl.length) withTemplate:@""];
+    
+    [mutableControl appendString:@"\n"];
+    
+    return [[TWPackage alloc] initWithID:identifier version:version name:name
+                            architecture:architecture control:mutableControl];
+}
+
 
 + (TWPackage * _Nullable)packageForIdentifier:(NSString *)packageID
 {
@@ -107,29 +123,45 @@
 
 + (NSRegularExpression *)regexForControlLineNamed:(NSString *)lineName
 {
-    NSString *pattern = [NSString stringWithFormat:@"(%@: .*)(\n|\r|\f)", lineName];
+    NSString *pattern = [NSString stringWithFormat:@"(%@: .*){1}(\n|\r|\f)*", lineName];
     return [NSRegularExpression regularExpressionWithPattern:pattern
-                                                     options:NSRegularExpressionCaseInsensitive
+                                                     options:0
                                                        error:nil];
 }
 
-+ (NSString *)valueForKey:(NSString *)lineName inControl:(NSString *)control
++ (NSString *)valueForKey:(NSString *)lineName inControl:(NSString *)string
 {
-    NSRegularExpression *lineRegex = [self regexForControlLineNamed:lineName];
-    NSRange lineRange = [lineRegex firstMatchInString:control options:0
-                                                range:NSMakeRange(0, control.length)].range;
+    if (string.length == 0) {
+        return nil;
+    }
     
-    if (lineRange.location != NSNotFound) {
-        NSString *keyString = [lineName stringByAppendingString:@": "];
+    NSRegularExpression *lineRegex = [self regexForControlLineNamed:lineName];
+    NSTextCheckingResult *result = [lineRegex firstMatchInString:string options:0
+                                                           range:NSMakeRange(0, string.length)];
+    
+    if (result) {
+        NSMutableString *valueString = [[string substringWithRange:result.range] mutableCopy];
         
-        NSString *valueString = [control substringWithRange:lineRange];
-        valueString = [valueString stringByReplacingOccurrencesOfString:keyString withString:@""];
-        valueString = [valueString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSRange keyStringRange = [valueString rangeOfString:@":"];
+        if (keyStringRange.location != NSNotFound) {
+            [valueString deleteCharactersInRange:NSMakeRange(0, keyStringRange.location + 1)];
+        }
+        
+        
+        NSRange valueStringRange = NSMakeRange(0, valueString.length);
+        while ([valueString hasPrefix:@" "]) {
+            [valueString deleteCharactersInRange:NSMakeRange(0, 1)];
+            valueStringRange.length -= 1;
+        }
+        
+        [valueString replaceOccurrencesOfString:@"\r" withString:@"" options:0 range:valueStringRange];
+        valueStringRange.length = valueString.length;
+        [valueString replaceOccurrencesOfString:@"\n" withString:@"" options:0 range:valueStringRange];
         
         return valueString;
     }
     
-    return @"";
+    return nil;
 }
 
 @end
