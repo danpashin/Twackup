@@ -29,6 +29,6 @@ char * _Nullable fgetbetween(const long start_pos, const long end_pos, FILE *fil
  @param handler Handler that calls every time function find package.
  @return Returns true when operation was success.
  */
-bool parse_packages_file(const char *path, void (^handler)(NSString *package));
+bool parse_packages_file(const char *path, void (^handler)(NSString *package, bool *stop));
 
 NS_ASSUME_NONNULL_END

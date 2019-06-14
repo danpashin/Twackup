@@ -19,28 +19,27 @@
  @param package Package identifier for parsing.
  @return Returns string of package control. Can return nil, if package not found.
  */
-+ (NSMutableString * _Nullable)controlForPackage:(NSString *)package;
++ (NSString * _Nullable)controlForPackage:(NSString *)package;
 
 @end
 
 @implementation TWDpkg
 
-+ (NSString *)dpkgPath
-{
-    return @"/usr/bin/dpkg-query";
-}
+char *const kTWDpkgDatabaseFilePath = "/var/lib/dpkg/status";
 
 + (NSArray <TWPackage *> *)allPackages
 {
-    NSMutableArray <TWPackage *> *allPackages = [NSMutableArray array];
-    parse_packages_file("/var/lib/dpkg/status", ^(NSString * _Nonnull package_description) {
-        TWPackage *package = [self packageForControl:package_description];
-        if (package) {
-            [allPackages addObject:package];
-        }
-    });
-    
-    return allPackages;
+    @autoreleasepool {
+        NSMutableArray <TWPackage *> *allPackages = [NSMutableArray array];
+        parse_packages_file(kTWDpkgDatabaseFilePath, ^(NSString * _Nonnull package_description, bool * _Nonnull stop) {
+            TWPackage *package = [self packageForControl:package_description];
+            if (package) {
+                [allPackages addObject:package];
+            }
+        });
+        
+        return allPackages;
+    }
 }
 
 + (TWPackage * _Nullable)packageForControl:(NSString *)control
@@ -48,6 +47,11 @@
     NSString *identifier = [self valueForKey:@"Package" inControl:control];
     if ([identifier hasPrefix:@"gsc."] || [identifier hasPrefix:@"cy+"] || identifier.length == 0)
         return nil;
+    
+    NSString *status = [self valueForKey:@"Status" inControl:control];
+    if (status.length > 0 && ![status containsString:@" installed"]) {
+        return nil;
+    }
     
     NSString *version = [self valueForKey:@"Version" inControl:control];
     NSString *architecture = [self valueForKey:@"Architecture" inControl:control];
@@ -87,36 +91,28 @@
 
 + (NSArray <NSString *> *)filesForPackage:(NSString *)packageID
 {
-    NSData *dpkgOutput = nil;
+    NSString *fullPath = [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.list", packageID];
     
-    NSArray *arguments = @[@"-L", packageID];
-    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&dpkgOutput] && dpkgOutput) {
-        NSString *allFiles = [[NSString alloc] initWithData:dpkgOutput
-                                                   encoding:NSUTF8StringEncoding];
-        return [allFiles componentsSeparatedByString:@"\n"];
+    NSError *error = nil;
+    NSString *contents = [[NSString alloc] initWithContentsOfFile:fullPath usedEncoding:nil error:&error];
+    if (error) {
+        return @[];
     }
     
-    return @[];
+    return [contents componentsSeparatedByString:@"\n"];
 }
 
-+ (NSMutableString * _Nullable)controlForPackage:(NSString *)packageID
++ (NSString * _Nullable)controlForPackage:(NSString *)packageID
 {
-    NSData *packageControl = nil;
+    __block NSString *packageControl = nil;
     
-    NSArray *arguments = @[@"-s", packageID];
-    if ([NSTask synchronouslyExecute:self.dpkgPath arguments:arguments output:&packageControl] && packageControl) {
-        NSMutableString *controlString = [[NSMutableString alloc] initWithData:packageControl encoding:NSUTF8StringEncoding];
-        if (!controlString)
-            return nil;
-        
-        NSRegularExpression *statusRegex = [self regexForControlLineNamed:@"Status"];
-        [statusRegex replaceMatchesInString:controlString options:0 range:NSMakeRange(0, controlString.length) withTemplate:@""];
-        
-        NSRegularExpression *controlVersionRegex = [self regexForControlLineNamed:@"Config-Version"];
-        [controlVersionRegex replaceMatchesInString:controlString options:0 range:NSMakeRange(0, controlString.length) withTemplate:@""];
-        
-        return controlString;
-    }
+    parse_packages_file(kTWDpkgDatabaseFilePath, ^(NSString * _Nonnull control, bool * _Nonnull stop) {
+        NSString *identifier = [self valueForKey:@"Package" inControl:control];
+        if ([identifier isEqualToString:packageID]) {
+            packageControl = control;
+            *stop = true;
+        }
+    });
     
     return nil;
 }

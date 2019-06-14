@@ -58,7 +58,7 @@
     }
 }
 
-+ (void)_rebuildAllPackagesAtURL:(NSURL *)workingDirectory failed:(NSMutableArray *_Nonnull *_Nullable)failedPackages
++ (void)_rebuildAllPackagesAtURL:(NSURL *)workingDirectory failed:(NSMutableArray *__autoreleasing *)failedPackages
 {
     printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR, localized("Preparing packages. Please, wait...\n"));
     

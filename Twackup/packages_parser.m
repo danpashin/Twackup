@@ -43,7 +43,7 @@ char *fgetbetween(const long start_pos, const long end_pos, FILE *file)
     }
 }
 
-bool parse_packages_file(const char *path, void (^handler)(NSString *package))
+bool parse_packages_file(const char *path, void (^handler)(NSString *package, bool *stop))
 {
     if (!path)
         return false;
@@ -78,11 +78,11 @@ bool parse_packages_file(const char *path, void (^handler)(NSString *package))
                 if (package) {
                     package = [[NSString alloc] initWithBytesNoCopy:substr length:length
                                                            encoding:NSASCIIStringEncoding freeWhenDone:YES];
-                    handler(package);
+                    handler(package, &stop);
                 } else {
                     package = [[NSString alloc] initWithBytesNoCopy:substr length:length
                                                            encoding:NSUTF8StringEncoding freeWhenDone:YES];
-                    handler(package);
+                    handler(package, &stop);
                 }
             }
             
