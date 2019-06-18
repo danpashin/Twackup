@@ -21,29 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray <TWPackage *> *)allPackages;
 
 /**
- Retrieves package files for the specified package.
-
- @param package Package identifier for parsing.
- @return Returns array of files path's for specified package.
- */
-+ (NSArray <NSString *> *)filesForPackage:(NSString *)package;
-
-/**
  Retrieves and parses package information from dpkg.
 
  @param packageID Package identifier for request.
  @return Return package model. Can return nil if package was not found.
  */
 + (TWPackage * _Nullable)packageForIdentifier:(NSString *)packageID;
-
-
-/**
- Creates regular expression for parsing line from control.
-
- @param lineName Line name in control file.
- @return Returns instance of NSRegularExpression class.
- */
-+ (NSRegularExpression *)regexForControlLineNamed:(NSString *)lineName;
 
 @end
 

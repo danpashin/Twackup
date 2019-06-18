@@ -13,20 +13,32 @@
 #define TWStringize(string) @TWStringize_internal(string)
 #endif
 
-#ifndef PRINT_DEF_COLOR
-#define PRINT_DEF_COLOR "\x1B[0m"
+#ifndef PRINT_DEF
+#define PRINT_DEF "\x1B[0m"
 #endif
 
-#ifndef PRINT_RED_COLOR
-#define PRINT_RED_COLOR "\x1B[31m"
+#ifndef PRINT_RED
+#define PRINT_RED "\x1B[31m"
 #endif
 
-#ifndef PRINT_YEL_COLOR
-#define PRINT_YEL_COLOR "\x1B[33m"
+#ifndef PRINT_BRED
+#define PRINT_BRED "\x1B[91m"
 #endif
 
-#ifndef PRINT_CYN_COLOR
-#define PRINT_CYN_COLOR "\x1B[36m"
+#ifndef PRINT_YEL
+#define PRINT_YEL "\x1B[33m"
+#endif
+
+#ifndef PRINT_BYEL
+#define PRINT_BYEL "\x1B[93m"
+#endif
+
+#ifndef PRINT_CYN
+#define PRINT_CYN "\x1B[36m"
+#endif
+
+#ifndef PRINT_GREEN
+#define PRINT_GREEN "\x1B[32m"
 #endif
 
 
@@ -34,8 +46,16 @@
 #import <libgen.h>
 
 #define error_log(format, ...)\
-    printf(PRINT_RED_COLOR "%s:%i " format "\n\n" PRINT_DEF_COLOR, basename(__FILE__), __LINE__, ##__VA_ARGS__ )
+printf(PRINT_BRED "Error: [%s:%i] " format "\n" PRINT_DEF, basename(__FILE__), __LINE__, ##__VA_ARGS__ )
+#endif
+
+#ifndef warn_log
+#define warn_log(format, ...)\
+printf(PRINT_BYEL "Warning: [%s:%i] " format "\n" PRINT_DEF, basename(__FILE__), __LINE__, ##__VA_ARGS__ )
 #endif
 
 
 static NSString *const kTWVersion = TWStringize(CURRENT_PROJECT_VERSION);
+static NSString *const kTWMainDirectoryPath = @"/var/mobile/Documents/twackup";
+static NSString *const kTWDatabaseFilePath = @"/var/lib/dpkg/status";
+static NSString *const kTWInfoDirectoryPath = @"/var/lib/dpkg/info";

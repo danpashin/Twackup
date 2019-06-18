@@ -38,8 +38,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSString *control;
 
 
+@property (strong, nonatomic, readonly, getter=getPackageFiles) NSArray <NSString *> *packageFiles;
+
+
 - (instancetype)initWithID:(NSString *)identifier version:(NSString *)version name:(NSString *)name
               architecture:(NSString *)architecture control:(NSString *)control;
+
+
+@end
+
+
+@interface TWPackage (Build)
 
 /**
  Builds deb from package files.
@@ -47,6 +56,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return Returns YES if deb was successfully built. Otherwise, returns NO.
  */
 - (BOOL)buildDebAtURL:(NSURL *)tempURL error:(NSError *_Nullable *_Nullable)error;
+
+@end
+
+
+@interface TWPackage (Control)
+
++ (NSString *)safeControlFromRAW:(NSString *)rawControl;
 
 @end
 

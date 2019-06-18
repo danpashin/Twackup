@@ -42,7 +42,7 @@
     [self _rebuildAllPackagesAtURL:workingDirectory failed:&failedPackages];
     const NSUInteger failedCount = failedPackages.count;
     
-    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR "\n", localized("Archiving..."));
+    printf(PRINT_YEL "%s" PRINT_DEF "\n", localized("Archiving..."));
     const BOOL archiveSuccess = [self archiveExistingPackages];
     
     
@@ -60,10 +60,10 @@
 
 + (void)_rebuildAllPackagesAtURL:(NSURL *)workingDirectory failed:(NSMutableArray *__autoreleasing *)failedPackages
 {
-    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR, localized("Preparing packages. Please, wait...\n"));
+    printf(PRINT_YEL "%s" PRINT_DEF, localized("Preparing packages. Please, wait...\n"));
     
     NSArray <TWPackage *> *allPackages = [TWDpkg allPackages];
-    printf(PRINT_YEL_COLOR "%s " PRINT_CYN_COLOR "%lu" PRINT_YEL_COLOR " %s." PRINT_DEF_COLOR "\n", 
+    printf(PRINT_YEL "%s " PRINT_CYN "%lu" PRINT_YEL " %s." PRINT_DEF "\n", 
            localized("Found"), (unsigned long)allPackages.count, localized("packages"));
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
@@ -75,7 +75,7 @@
     
     [allPackages enumerateObjectsUsingBlock:^(TWPackage * _Nonnull package, NSUInteger idx, BOOL * _Nonnull stop) {
         [operationQueue addOperationWithBlock:^{
-            printf(PRINT_YEL_COLOR "%s: " PRINT_DEF_COLOR "%s\n", localized("Processing"), package.identifier.UTF8String);
+            printf(PRINT_GREEN "%s: " PRINT_DEF "%s\n", localized("Processing"), package.identifier.UTF8String);
             
             if (![self rebuildPackage:package inDirectory:workingDirectory]) {
                 [localFailed addObject:package.identifier];
@@ -105,9 +105,9 @@
     NSError *error = nil;
     BOOL buildSuccess = [package buildDebAtURL:directory error:&error];
     if (buildSuccess) {
-        printf(PRINT_YEL_COLOR "%s: " PRINT_DEF_COLOR "%s\n", localized("Done"), package.identifier.UTF8String);
+        printf(PRINT_GREEN "%s: " PRINT_DEF "%s\n", localized("Done"), package.identifier.UTF8String);
     } else {
-        error_log("Package %s not found.\n%s", package.identifier.UTF8String, error.description.UTF8String);
+        error_log("Package %s could not be build.\n%s", package.identifier.UTF8String, error.description.UTF8String);
     }
     
     return buildSuccess;
@@ -115,7 +115,7 @@
 
 + (NSURL * _Nullable)workingDirectoryURL
 {
-    NSURL *workingDirectory = [NSURL fileURLWithPath:@"/var/mobile/Documents/twackup"];
+    NSURL *workingDirectory = [NSURL fileURLWithPath:kTWMainDirectoryPath];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:workingDirectory.path])
@@ -154,20 +154,20 @@
 
 + (void)listInstalled
 {
-    printf(PRINT_YEL_COLOR "%s" PRINT_DEF_COLOR, localized("Preparing packages. Please, wait...\n"));
+    printf(PRINT_YEL "%s" PRINT_DEF, localized("Preparing packages. Please, wait...\n"));
     
     NSMutableArray <TWPackage *> *allPackages = [[TWDpkg allPackages] mutableCopy];
     [allPackages sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     
     unsigned long counter = 0;
     for (TWPackage *package in allPackages) {
-        printf(PRINT_RED_COLOR "%3.lu" PRINT_DEF_COLOR ": ", ++counter);
+        printf(PRINT_RED "%3.lu" PRINT_DEF ": ", ++counter);
         
         if (package.name.length > 0) {
-            printf("%s - " PRINT_CYN_COLOR "%s" PRINT_DEF_COLOR "\n", 
+            printf("%s - " PRINT_CYN "%s" PRINT_DEF "\n", 
                    package.name.UTF8String, package.identifier.UTF8String);
         } else {
-            printf(PRINT_CYN_COLOR "%s" PRINT_DEF_COLOR "\n", package.identifier.UTF8String);
+            printf(PRINT_CYN "%s" PRINT_DEF "\n", package.identifier.UTF8String);
         }
     }
 }

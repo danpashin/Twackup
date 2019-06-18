@@ -29,6 +29,10 @@
 		A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21CF21BEBA9E008F3DE9 /* TWackup.m */; };
 		A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */ = {isa = PBXBuildFile; fileRef = A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */; };
 		A57A21D521BEBE9E008F3DE9 /* TWDpkg.m in Sources */ = {isa = PBXBuildFile; fileRef = A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */; };
+		A5D188A622B9031100B974B1 /* TWPackage+Control.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D188A422B9031100B974B1 /* TWPackage+Control.m */; };
+		A5D188A922B9042200B974B1 /* TWRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D188A722B9042200B974B1 /* TWRegex.h */; };
+		A5D188AA22B9042200B974B1 /* TWRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D188A822B9042200B974B1 /* TWRegex.m */; };
+		A5D188AE22B904A500B974B1 /* TWPackage+Build.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D188AC22B904A500B974B1 /* TWPackage+Build.m */; };
 		C1CD047576C288B18F6CB2A9 /* libPods-twackup_macos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BC7827BD552AC2CE4E5679B /* libPods-twackup_macos.a */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +75,10 @@
 		A57A21CF21BEBA9E008F3DE9 /* TWackup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWackup.m; sourceTree = "<group>"; };
 		A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWDpkg.h; sourceTree = "<group>"; };
 		A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWDpkg.m; sourceTree = "<group>"; };
+		A5D188A422B9031100B974B1 /* TWPackage+Control.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TWPackage+Control.m"; sourceTree = "<group>"; };
+		A5D188A722B9042200B974B1 /* TWRegex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWRegex.h; sourceTree = "<group>"; };
+		A5D188A822B9042200B974B1 /* TWRegex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWRegex.m; sourceTree = "<group>"; };
+		A5D188AC22B904A500B974B1 /* TWPackage+Build.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TWPackage+Build.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +141,14 @@
 				A57A21CF21BEBA9E008F3DE9 /* TWackup.m */,
 				A57A21D221BEBE9E008F3DE9 /* TWDpkg.h */,
 				A57A21D321BEBE9E008F3DE9 /* TWDpkg.m */,
+				A5D188A722B9042200B974B1 /* TWRegex.h */,
+				A5D188A822B9042200B974B1 /* TWRegex.m */,
 				0B3BB6EF229876E900BDE0DD /* packages_parser.h */,
 				0B3BB6EE229876E800BDE0DD /* packages_parser.m */,
 				A569C95C21BA84BB003DE3C5 /* TWPackage.h */,
 				A569C95D21BA84BB003DE3C5 /* TWPackage.m */,
+				A5D188AC22B904A500B974B1 /* TWPackage+Build.m */,
+				A5D188A422B9031100B974B1 /* TWPackage+Control.m */,
 				A569C96021BA8635003DE3C5 /* NSTask+Twackup.h */,
 				A569C96121BA8635003DE3C5 /* NSTask+Twackup.m */,
 				A53CC71021E0966000848785 /* TWLocalizable.h */,
@@ -202,6 +214,7 @@
 				A569C95E21BA84BB003DE3C5 /* TWPackage.h in Headers */,
 				A53CC71221E0966000848785 /* TWLocalizable.h in Headers */,
 				A57A21D421BEBE9E008F3DE9 /* TWDpkg.h in Headers */,
+				A5D188A922B9042200B974B1 /* TWRegex.h in Headers */,
 				A57A21D021BEBA9E008F3DE9 /* TWackup.h in Headers */,
 				A569C95A21BA81D0003DE3C5 /* NSTask.h in Headers */,
 			);
@@ -356,9 +369,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57A21D521BEBE9E008F3DE9 /* TWDpkg.m in Sources */,
+				A5D188A622B9031100B974B1 /* TWPackage+Control.m in Sources */,
 				A50F041B21BA548F00859738 /* main.m in Sources */,
 				A569C96321BA8635003DE3C5 /* NSTask+Twackup.m in Sources */,
+				A5D188AA22B9042200B974B1 /* TWRegex.m in Sources */,
 				A57A21D121BEBA9E008F3DE9 /* TWackup.m in Sources */,
+				A5D188AE22B904A500B974B1 /* TWPackage+Build.m in Sources */,
 				A569C95F21BA84BB003DE3C5 /* TWPackage.m in Sources */,
 				0B3BB6F0229876E900BDE0DD /* packages_parser.m in Sources */,
 				A53CC71321E0966000848785 /* TWLocalizable.m in Sources */,
@@ -424,7 +440,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.9;
+				CURRENT_PROJECT_VERSION = 0.10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -511,7 +527,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPYING_PRESERVES_HFS_DATA = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 0.9;
+				CURRENT_PROJECT_VERSION = 0.10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
