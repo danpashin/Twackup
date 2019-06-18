@@ -9,7 +9,7 @@ All you need is to type `twackup -a` in terminal. After it finishes, you can pic
 
 It scans dpkg output, copies files to temporary folder and build deb. Therefore if you deleted some files from filesystem, they will not be copied to a new deb.
 
-##How to build?
+## How to build?
 Ensure you have CocoaPods installed. If not, install it using command:
 
 `sudo gem install cocoapods`

@@ -13,7 +13,7 @@
 
 @implementation TWPackage (Build)
 
-- (BOOL)buildDebAtURL:(NSURL *)tempURL error:(NSError *_Nullable *_Nullable)error
+- (BOOL)buildDebAtURL:(NSURL *)tempURL error:(NSError *_Nullable __autoreleasing *_Nullable)error
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -70,7 +70,7 @@
     return YES;
 }
 
-- (BOOL)copyMetadataToDir:(NSURL *)directory error:(NSError *_Nullable *_Nullable)error
+- (BOOL)copyMetadataToDir:(NSURL *)directory error:(NSError *_Nullable __autoreleasing *_Nullable)error
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *debianFolder = [directory URLByAppendingPathComponent:@"DEBIAN"];

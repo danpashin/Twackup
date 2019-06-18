@@ -13,7 +13,7 @@
 
 + (BOOL)synchronouslyExecute:(NSString *)executablePath
                   arguments:(NSArray <NSString *> * _Nullable)arguments
-                     output:(NSData * _Nullable * _Nullable)output
+                     output:(NSData * _Nullable __autoreleasing * _Nullable)output
 {
     NSPipe *pipe = [NSPipe pipe];
     
