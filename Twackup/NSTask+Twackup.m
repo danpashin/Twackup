@@ -15,6 +15,8 @@
                   arguments:(NSArray <NSString *> * _Nullable)arguments
                      output:(NSData * _Nullable __autoreleasing * _Nullable)output
 {
+    
+    
     NSPipe *pipe = [NSPipe pipe];
     
     NSTask *task = [NSTask new];
@@ -24,9 +26,7 @@
     
     if (@available(iOS 11.0, *)) {
         task.executableURL = [NSURL fileURLWithPath:executablePath];
-        
-        NSError *error = nil;
-        [task launchAndReturnError:&error];
+        [task launchAndReturnError:nil];
     } else {
         task.launchPath = executablePath;
         [task launch];

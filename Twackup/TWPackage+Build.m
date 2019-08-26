@@ -36,7 +36,10 @@
         return NO;
     
     NSString *dpkgPath = @"/usr/bin/dpkg-deb";
-    NSArray *arguments = @[@"-b", workingDirectoryURL.path];
+    NSMutableArray *arguments = [@[@"-b", workingDirectoryURL.path] mutableCopy];
+    if ([fileManager fileExistsAtPath:@"/chimera"]) {
+        [arguments insertObject:@"-Znone" atIndex:0];
+    }
     BOOL buildSuccess = [NSTask synchronouslyExecute:dpkgPath arguments:arguments output:nil];
     if (buildSuccess)
         [fileManager removeItemAtURL:workingDirectoryURL error:nil];
