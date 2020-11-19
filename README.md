@@ -1,4 +1,4 @@
-# Twackup
+### This project has been deprecated as it was replaced by [modern alternative written in Rust](https://github.com/danpashin/twackup-rs).
 
 ## Description
 What is Twackup? Twackup is a simple iOS command line tool that can backup all your installed tweaks from Cydia back to debs.
